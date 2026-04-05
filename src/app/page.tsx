@@ -32,7 +32,7 @@ export default function Home() {
       {/* Hero */}
       <section className="py-24 sm:py-32 border-b border-[var(--border)]">
         <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--accent)] mb-6">
-          Senior Frontend Engineer
+          Software Engineer
         </p>
         <h1 className="font-display text-5xl sm:text-6xl font-normal leading-[1.1] text-[var(--text)] tracking-tight [&>em]:text-[var(--accent)] [&>em]:italic [&>em]:not-italic">
           I build <em>custom web apps</em> and dashboards for teams that have outgrown
