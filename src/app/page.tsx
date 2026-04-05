@@ -40,7 +40,7 @@ export default function Home() {
           with small teams to ship internal tools, dashboards, and SaaS products
           that actually fit their workflow.
         </p>
-        <
+        <a
           href="#contact"
           className="mt-8 inline-block rounded bg-teal-400 px-6 py-3 text-sm font-semibold text-zinc-950 hover:bg-teal-300"
         >

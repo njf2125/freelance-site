@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+@theme {
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+}
+
+:root {
+  --bg: #faf6f0;
+  --surface: #f3ede4;
+  --border: #e0d8cc;
+  --text: #1a1510;
+  --muted: #7a6e62;
+  --faint: #b0a496;
+  --accent: #b07d4a;
+}
