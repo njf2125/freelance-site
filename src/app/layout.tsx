@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-dm-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "nickfig.dev — Freelance Frontend Engineer",
@@ -17,8 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-screen bg-zinc-950 font-sans text-zinc-300 antialiased flex flex-col">
+    <html
+      lang="en"
+      className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
+    >
+      <body
+        className="min-h-screen font-sans antialiased flex flex-col"
+        style={{ backgroundColor: "var(--bg)", color: "var(--text)" }}
+      >
         <Nav />
         <div className="flex-1">{children}</div>
         <Footer />
