@@ -14,17 +14,14 @@ export default function About() {
         Nick Figliolia
       </h1>
       <p className="mt-2 text-lg text-zinc-400">
-        Senior Frontend Engineer
+        QA Engineer turned Software Engineer
       </p>
 
       <div className="mt-10 max-w-2xl space-y-6 text-zinc-300">
         <p>
-          I&apos;m a senior frontend engineer at{" "}
-          <span className="text-zinc-100 font-medium">nCino</span>, where I
-          build React and TypeScript applications for the financial services
-          industry. Day-to-day I work across complex data-heavy UIs, design
-          systems, and the kind of internal tooling that quietly makes
-          organizations run.
+          I started in QA and moved into software engineering — which means I
+          think carefully about correctness and edge cases, not just getting
+          things to work the happy path.
         </p>
         <p>
           On the side, I take on freelance projects for teams that need custom

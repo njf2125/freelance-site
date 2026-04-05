@@ -40,10 +40,7 @@ export default function Home() {
           with small teams to ship internal tools, dashboards, and SaaS products
           that actually fit their workflow.
         </p>
-        <p className="mt-3 font-mono text-sm text-zinc-500">
-          Projects typically start at $2,500.
-        </p>
-        <a
+        <
           href="#contact"
           className="mt-8 inline-block rounded bg-teal-400 px-6 py-3 text-sm font-semibold text-zinc-950 hover:bg-teal-300"
         >
@@ -89,15 +86,6 @@ export default function Home() {
         <h2 className="text-2xl font-bold tracking-tight text-zinc-100">
           Got a project? Let&apos;s talk.
         </h2>
-        <p className="mt-2 text-sm text-zinc-400">
-          Prefer email?{" "}
-          <a
-            href="mailto:nickfigliolia@gmail.com"
-            className="text-teal-400 hover:text-teal-300"
-          >
-            nickfigliolia@gmail.com
-          </a>
-        </p>
         <div className="mt-8 max-w-xl">
           <ContactForm />
         </div>
