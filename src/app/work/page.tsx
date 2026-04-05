@@ -10,7 +10,7 @@ export default function WorkIndex() {
   const caseStudies = getAllCaseStudies();
 
   return (
-    <main className="mx-auto max-w-[780px] px-6 py-20 sm:py-24">
+    <main className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
       <p className="font-mono text-[11px] uppercase tracking-widest mb-4 text-[var(--accent)]">
         Portfolio
       </p>

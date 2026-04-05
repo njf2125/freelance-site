@@ -9,7 +9,7 @@ export default function Nav() {
         borderColor: "var(--border)",
       }}
     >
-      <nav className="mx-auto flex max-w-[780px] items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
         <Link
           href="/"
           className="font-mono text-sm font-medium tracking-tight"
