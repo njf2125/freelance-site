@@ -8,11 +8,11 @@
 }
 
 :root {
-  --bg: #faf6f0;
-  --surface: #f3ede4;
-  --border: #e0d8cc;
+  --bg: #e6dfd1;
+  --surface: #dbd2bf;
+  --border: #c8bdac;
   --text: #1a1510;
   --muted: #7a6e62;
-  --faint: #b0a496;
+  --faint: #96846a;
   --accent: #b07d4a;
 }
