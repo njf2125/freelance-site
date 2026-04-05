@@ -28,7 +28,7 @@ export default function Home() {
   const featured = getAllCaseStudies().filter((p: CaseStudy) => p.featured);
 
   return (
-    <>
+    <main>
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
@@ -102,6 +102,6 @@ export default function Home() {
           <ContactForm />
         </div>
       </section>
-    </>
+    </main>
   );
 }
