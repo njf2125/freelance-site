@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -23,11 +22,6 @@ export default function RootLayout({
         <Nav />
         <div className="flex-1">{children}</div>
         <Footer />
-        <Script
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token": "YOUR_TOKEN_HERE"}'
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
