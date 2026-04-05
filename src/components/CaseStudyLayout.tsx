@@ -20,48 +20,43 @@ export default function CaseStudyLayout({
   children,
 }: CaseStudyLayoutProps) {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-teal-400 mb-3">
+    <main className="mx-auto max-w-[780px] px-6 py-20 sm:py-24">
+      <p className="font-mono text-[11px] uppercase tracking-widest mb-6 text-[var(--accent)]">
         Case Study
       </p>
-      <h1 className="text-4xl font-bold tracking-tight text-zinc-100">
+      <h1 className="font-display text-4xl sm:text-5xl font-normal tracking-tight text-[var(--text)]">
         {title}
       </h1>
-      <p className="mt-2 text-lg text-zinc-400">{subtitle}</p>
+      <p className="mt-4 text-lg text-[var(--muted)] leading-relaxed max-w-[600px]">{subtitle}</p>
 
-      <div className="mt-6 flex flex-wrap gap-2">
-        {stack.map((tech) => (
-          <span
-            key={tech}
-            className="font-mono text-xs px-2 py-0.5 rounded border border-amber-400/30 bg-amber-400/10 text-amber-400"
-          >
-            {tech}
-          </span>
-        ))}
+      <div className="mt-6">
+        <p className="font-mono text-xs text-[var(--faint)]">
+          {stack.join(", ")}
+        </p>
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
-          <p className="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-2">
+      <div className="mt-16 grid gap-8 sm:grid-cols-3">
+        <div className="border-l-[2px] border-[var(--border)] pl-4">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--faint)] mb-3">
             Problem
           </p>
-          <p className="text-sm text-zinc-300">{problem}</p>
+          <p className="text-sm text-[var(--text)] leading-relaxed">{problem}</p>
         </div>
-        <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
-          <p className="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-2">
+        <div className="border-l-[2px] border-[var(--border)] pl-4">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--faint)] mb-3">
             What Was Built
           </p>
-          <p className="text-sm text-zinc-300">{whatWasBuilt}</p>
+          <p className="text-sm text-[var(--text)] leading-relaxed">{whatWasBuilt}</p>
         </div>
-        <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
-          <p className="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-2">
+        <div className="border-l-[2px] border-[var(--border)] pl-4">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--faint)] mb-3">
             Outcome
           </p>
-          <p className="text-sm text-zinc-300">{outcome}</p>
+          <p className="text-sm text-[var(--text)] leading-relaxed">{outcome}</p>
         </div>
       </div>
 
-      <div className="mt-12 prose prose-invert prose-zinc max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-teal-400 prose-strong:text-zinc-100">
+      <div className="mt-16 prose max-w-none prose-p:text-[var(--muted)] prose-p:leading-loose prose-headings:font-display prose-headings:font-normal prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-strong:font-medium">
         {children}
       </div>
     </main>

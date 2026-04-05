@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import ProjectCard from "@/components/ProjectCard";
+import WorkTable from "@/components/WorkTable";
 import { getAllCaseStudies } from "@/lib/mdx";
-import { CaseStudy } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Work — nickfig.dev",
@@ -11,19 +10,15 @@ export default function WorkIndex() {
   const caseStudies = getAllCaseStudies();
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-teal-400 mb-3">
+    <main className="mx-auto max-w-[780px] px-6 py-20 sm:py-24">
+      <p className="font-mono text-[11px] uppercase tracking-widest mb-4 text-[var(--accent)]">
         Portfolio
       </p>
-      <h1 className="text-4xl font-bold tracking-tight text-zinc-100">Work</h1>
-      <p className="mt-3 text-zinc-400">
+      <h1 className="font-display text-4xl sm:text-5xl font-normal tracking-tight text-[var(--text)] mb-6">Work</h1>
+      <p className="text-lg text-[var(--muted)] leading-relaxed max-w-[480px] mb-12">
         Selected projects from freelance and personal work.
       </p>
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        {caseStudies.map((project: CaseStudy) => (
-          <ProjectCard key={project.slug} {...project} />
-        ))}
-      </div>
+      <WorkTable projects={caseStudies} />
     </main>
   );
 }
