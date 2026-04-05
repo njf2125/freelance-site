@@ -1,4 +1,4 @@
-import ProjectCard from "@/components/ProjectCard";
+import WorkTable from "@/components/WorkTable";
 import ContactForm from "@/components/ContactForm";
 import { getAllCaseStudies } from "@/lib/mdx";
 import { CaseStudy } from "@/lib/types";
@@ -28,65 +28,61 @@ export default function Home() {
   const featured = getAllCaseStudies().filter((p: CaseStudy) => p.featured);
 
   return (
-    <main>
+    <main className="mx-auto max-w-[780px] px-6">
       {/* Hero */}
-      <section className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
-          I build custom web apps and dashboards for teams that have outgrown
+      <section className="py-24 sm:py-32 border-b border-[var(--border)]">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--accent)] mb-6">
+          Senior Frontend Engineer
+        </p>
+        <h1 className="font-display text-5xl sm:text-6xl font-normal leading-[1.1] text-[var(--text)] tracking-tight [&>em]:text-[var(--accent)] [&>em]:italic [&>em]:not-italic">
+          I build <em>custom web apps</em> and dashboards for teams that have outgrown
           their off-the-shelf tools.
         </h1>
-        <p className="mt-6 max-w-2xl text-lg text-zinc-400">
-          Senior frontend engineer specializing in React and TypeScript. I work
+        <p className="mt-8 max-w-[480px] text-lg text-[var(--muted)] leading-relaxed">
+          Specializing in React and TypeScript. I work
           with small teams to ship internal tools, dashboards, and SaaS products
           that actually fit their workflow.
         </p>
-        <a
-          href="#contact"
-          className="mt-8 inline-block rounded bg-teal-400 px-6 py-3 text-sm font-semibold text-zinc-950 hover:bg-teal-300"
-        >
-          Start a conversation
-        </a>
       </section>
 
       {/* Selected Work */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-100">
+      <section className="py-20 sm:py-24 border-b border-[var(--border)]">
+        <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-8">
           Selected Work
         </h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {featured.map((project: CaseStudy) => (
-            <ProjectCard key={project.slug} {...project} />
-          ))}
-        </div>
+        <WorkTable projects={featured} />
       </section>
 
       {/* Process */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-100">
+      <section className="py-20 sm:py-24 border-b border-[var(--border)]">
+        <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-12">
           How I Work
         </h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-12 sm:grid-cols-3 sm:gap-8">
           {processSteps.map((step) => (
-            <div
-              key={step.number}
-              className="rounded-lg border border-zinc-800 bg-zinc-900 p-6"
-            >
-              <p className="font-mono text-xs text-zinc-500">{step.number}</p>
-              <h3 className="mt-2 text-base font-semibold tracking-tight text-zinc-100">
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm text-zinc-400">{step.description}</p>
+            <div key={step.number} className="flex flex-col">
+              <p className="font-mono text-sm text-[var(--muted)] mb-4">
+                {step.number} &mdash;
+              </p>
+              <div className="border-t border-[var(--border)] pt-4">
+                <h3 className="font-sans text-base font-medium text-[var(--text)]">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm text-[var(--muted)] leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Contact */}
-      <section id="contact" className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-100">
+      <section id="contact" className="py-20 sm:py-24">
+        <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-8">
           Got a project? Let&apos;s talk.
         </h2>
-        <div className="mt-8 max-w-xl">
+        <div className="max-w-[480px]">
           <ContactForm />
         </div>
       </section>
