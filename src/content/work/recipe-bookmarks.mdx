@@ -1,0 +1,37 @@
+---
+title: Recipe Bookmarks
+subtitle: Full-stack recipe saving app with AI grocery list parsing
+stack: [React, TypeScript, Cloudflare Pages, Cloudflare D1, Cloudflare Workers, Gemini Vision, FTS5]
+problem: A user needed to save, organize, and search recipes from across the web — with rich link previews, multi-category tagging, and full-text search — without a SaaS subscription or recurring cost.
+whatWasBuilt: A full-stack web app with server-side Open Graph scraping for automatic link previews, SQLite FTS5 full-text search, multi-category tagging, two-tier auth (user vs admin), and an AI-powered grocery list feature using Gemini Vision to parse photos of handwritten lists into structured ingredient data stored in D1.
+outcome: A production app used daily, running entirely on Cloudflare's free tier. Demonstrates full-stack architecture, AI feature integration, custom auth, and edge database design — with zero ongoing infrastructure cost.
+featured: true
+---
+
+## Background
+
+This started as a practical problem: saving recipes from across the web in a way that's actually useful — with previews, categories, and search — without paying $10/month for a tool that does 80% of what's needed.
+
+## The Problem
+
+Generic bookmark tools don't understand recipes. There's no category structure, no ingredient context, and no admin layer for managing the library. The only option was to build it.
+
+## What I Built
+
+A full-stack web app on Cloudflare's edge infrastructure:
+
+- **Open Graph scraping** via a Cloudflare Worker — paste a URL, get title, image, and description automatically
+- **Multi-category tagging** with a junction table in D1 (SQLite at the edge)
+- **FTS5 full-text search** across titles, descriptions, and notes — no external search service
+- **Two-tier auth** — a shared user password for the main app, a separate admin password for category management and bulk operations
+- **AI grocery list parsing** — Gemini Vision (`gemini-2.5-flash`) reads a photo of a handwritten grocery list and returns structured ingredient data, persisted to D1
+
+## Key Technical Decision
+
+SQLite FTS5 at the edge (via Cloudflare D1) instead of an external search service like Algolia. The tradeoff: zero cost, zero latency, no vendor dependency — at the cost of less sophisticated relevance ranking. For a personal recipe app, it's the right call.
+
+The AI grocery feature was added after launch as a self-contained enhancement — a Cloudflare Worker endpoint that accepts a base64-encoded image, calls Gemini Vision, and returns parsed ingredients. Adding AI to an existing app without restructuring the whole thing is a useful skill to demonstrate.
+
+## Stack
+
+React + TypeScript · Cloudflare Pages · Cloudflare D1 (SQLite) · Cloudflare Workers · Gemini Vision API · FTS5

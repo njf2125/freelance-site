@@ -1,0 +1,37 @@
+---
+title: SamePage
+subtitle: Collaborative reading tracker PWA
+stack: [React, TypeScript, Vite, Firebase Auth, Firestore, Cloudflare Pages, PWA]
+problem: Two people reading the same book needed a shared space to log progress, leave notes, and stay in sync — without spreadsheets or constant texting. No existing app supported the lightweight collaborative workflow they needed.
+whatWasBuilt: A Progressive Web App installable on iOS and Android, with real-time sync powered by Firestore listeners, shared reading state, comment threads, and invite-based access control. Migrated from Supabase to Firebase Auth + Firestore mid-development when requirements evolved — maintaining continuity in a live production app.
+outcome: A fully functional multi-user PWA used daily. Demonstrates end-to-end app architecture including auth, real-time data sync, mobile UX, and mid-project infrastructure decisions under real constraints.
+featured: true
+---
+
+## Background
+
+SamePage started as a personal project: a way for two people to track their reading together without stitching together spreadsheets and text messages. The goal was something installable on both iOS and Android, lightweight, and always in sync.
+
+## The Problem
+
+Existing reading apps are built for solo readers. There was no lightweight, shared-first reading tracker that felt like a proper app — not a Notion page, not a spreadsheet, not a group chat thread.
+
+## What I Built
+
+A full-stack PWA with:
+
+- **Firebase Auth** for email-based authentication (invite-only access)
+- **Firestore** with real-time listeners for live reading state sync between users
+- **PWA manifest + service worker** for home screen installation on iOS and Android
+- **Comment threads** per book for shared annotations
+- **Invite system** to add collaborators without open registration
+
+## Key Technical Decision
+
+Mid-development, I migrated from Supabase (PostgreSQL + Supabase Auth) to Firebase Auth + Firestore. The trigger was Supabase's free-tier inactivity pausing — a real production risk for a small personal app. I migrated auth and data while the app was in active use, with no downtime and no data loss.
+
+This required remapping the relational data model (books, comments, invites tables) to Firestore's document/collection structure — a meaningful architectural shift, not a swap of credentials.
+
+## Stack
+
+React + TypeScript + Vite · Firebase Auth · Firestore · Cloudflare Pages · PWA
