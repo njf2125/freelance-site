@@ -12,12 +12,19 @@ export async function POST(req: NextRequest) {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  await resend.emails.send({
-    from: "portfolio@nickfig.dev",
-    to: "nickfigliolia@gmail.com",
-    subject: `New inquiry from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-  });
+  try {
+    await resend.emails.send({
+      from: "portfolio@nickfig.dev",
+      to: "nickfigliolia@gmail.com",
+      subject: `New inquiry from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    });
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to send message. Please try again." },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({ success: true });
 }
