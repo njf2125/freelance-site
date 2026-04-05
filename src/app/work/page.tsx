@@ -4,7 +4,7 @@ import { getAllCaseStudies } from "@/lib/mdx";
 import { CaseStudy } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Work — Nick Figliolia",
+  title: "Work — nickfig.dev",
 };
 
 export default function WorkIndex() {

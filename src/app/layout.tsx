@@ -6,7 +6,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Nick Figliolia — Freelance Frontend Engineer",
+  title: "nickfig.dev — Freelance Frontend Engineer",
   description:
     "I build custom web apps and dashboards for teams that have outgrown their off-the-shelf tools.",
 };
