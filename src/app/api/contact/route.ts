@@ -1,7 +1,6 @@
-import { Resend } from "resend";
-import { NextRequest, NextResponse } from "next/server";
-
 export const runtime = "edge";
+
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { name, email, message } = await req.json();
@@ -10,20 +9,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "All fields required." }, { status: 400 });
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      access_key: process.env.WEB3FORMS_KEY,
+      name,
+      email,
+      message,
+      subject: `New inquiry from ${name} — nickfig.dev`,
+    }),
+  });
 
-  try {
-    await resend.emails.send({
-      from: "portfolio@nickfig.dev",
-      to: "nickfigliolia@gmail.com",
-      subject: `New inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    });
-  } catch {
-    return NextResponse.json(
-      { error: "Failed to send message. Please try again." },
-      { status: 500 }
-    );
+  const data = await response.json();
+
+  if (!data.success) {
+    return NextResponse.json({ error: "Failed to send message." }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });
