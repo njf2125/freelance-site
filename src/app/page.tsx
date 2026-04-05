@@ -28,9 +28,9 @@ export default function Home() {
   const featured = getAllCaseStudies().filter((p: CaseStudy) => p.featured);
 
   return (
-    <main className="mx-auto max-w-[780px] px-6">
+    <main className="mx-auto max-w-4xl px-6">
       {/* Hero */}
-      <section className="py-24 sm:py-32 border-b border-[var(--border)]">
+      <section className="py-16 sm:py-24 border-b border-[var(--border)]">
         <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--accent)] mb-6">
           Software Engineer
         </p>
@@ -38,7 +38,7 @@ export default function Home() {
           I build <em>custom web apps</em> and dashboards for teams that have outgrown
           their off-the-shelf tools.
         </h1>
-        <p className="mt-8 max-w-[480px] text-lg text-[var(--muted)] leading-relaxed">
+        <p className="mt-8 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
           Specializing in React and TypeScript. I work
           with small teams to ship internal tools, dashboards, and SaaS products
           that actually fit their workflow.
@@ -46,7 +46,7 @@ export default function Home() {
       </section>
 
       {/* Selected Work */}
-      <section className="py-20 sm:py-24 border-b border-[var(--border)]">
+      <section className="py-16 sm:py-20 border-b border-[var(--border)]">
         <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-8">
           Selected Work
         </h2>
@@ -54,7 +54,7 @@ export default function Home() {
       </section>
 
       {/* Process */}
-      <section className="py-20 sm:py-24 border-b border-[var(--border)]">
+      <section className="py-16 sm:py-20 border-b border-[var(--border)]">
         <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-12">
           How I Work
         </h2>
@@ -78,11 +78,11 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 sm:py-24">
+      <section id="contact" className="py-16 sm:py-20">
         <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-8">
           Got a project? Let&apos;s talk.
         </h2>
-        <div className="max-w-[480px]">
+        <div className="max-w-2xl">
           <ContactForm />
         </div>
       </section>
