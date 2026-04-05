@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — Nick Figliolia",
+  title: "About — nickfig.dev",
 };
 
 export default function About() {
@@ -11,7 +11,7 @@ export default function About() {
         About
       </p>
       <h1 className="text-4xl font-bold tracking-tight text-zinc-100">
-        Nick Figliolia
+        About Me
       </h1>
       <p className="mt-2 text-lg text-zinc-400">
         QA Engineer turned Software Engineer

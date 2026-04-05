@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const { frontmatter } = getCaseStudy(slug);
-    return { title: `${frontmatter.title} — Nick Figliolia` };
+    return { title: `${frontmatter.title} — nickfig.dev` };
   } catch {
     return { title: "Not Found" };
   }
