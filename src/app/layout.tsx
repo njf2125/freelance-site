@@ -24,7 +24,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "nickfig.dev — Freelance Frontend Engineer",
+  title: "nickfig.dev — Software Engineer",
   description:
     "I build custom web apps and dashboards for teams that have outgrown their off-the-shelf tools.",
 };
