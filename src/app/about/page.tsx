@@ -12,7 +12,7 @@ export default function About() {
           <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-3">
             About
           </p>
-          <h1 className="text-3xl font-medium tracking-tight mb-1">Nick Figliolia</h1>
+          <h1 className="text-3xl font-medium tracking-tight text-[var(--text)] mb-1">Nick Figliolia</h1>
           <p className="text-sm font-mono text-[var(--muted)] mb-6">
             Senior Frontend Engineer · nCino
           </p>
