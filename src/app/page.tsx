@@ -26,7 +26,10 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl px-6">
       {/* Hero */}
-      <section className="py-20 sm:py-32 border-b border-[var(--border)]">
+      <section
+        className="py-20 sm:py-32 border-b border-[var(--border)]"
+        style={{ background: 'radial-gradient(ellipse 70% 55% at 0% 40%, rgba(45, 212, 191, 0.07) 0%, transparent 100%)' }}
+      >
         <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
           <span className="block font-normal text-[var(--muted)]">
             That project living rent-free in your head?
@@ -58,7 +61,7 @@ export default function Home() {
 
       {/* Work */}
       <section className="mt-16 pb-16 border-b border-[var(--border)]">
-        <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-6">
+        <p className="text-xs font-mono text-[var(--accent)] uppercase tracking-widest mb-6">
           Work
         </p>
 
@@ -117,7 +120,7 @@ export default function Home() {
         <div className="grid gap-12 sm:grid-cols-3 sm:gap-8">
           {processSteps.map((step) => (
             <div key={step.number} className="flex flex-col">
-              <p className="font-mono text-sm text-[var(--muted)] mb-4">
+              <p className="font-mono text-sm text-[var(--accent)] mb-4">
                 {step.number} &mdash;
               </p>
               <div className="border-t border-[var(--border)] pt-4">
