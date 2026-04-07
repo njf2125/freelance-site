@@ -28,7 +28,7 @@ export default function Home() {
       {/* Hero */}
       <section
         className="py-20 sm:py-32 border-b border-[var(--border)]"
-        style={{ background: 'radial-gradient(ellipse 70% 55% at 0% 40%, rgba(45, 212, 191, 0.07) 0%, transparent 100%)' }}
+        style={{ background: 'radial-gradient(ellipse 120% 60% at -10% 40%, rgba(45, 212, 191, 0.06) 0%, transparent 70%)' }}
       >
         <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
           <span className="block font-normal text-[var(--muted)]">
