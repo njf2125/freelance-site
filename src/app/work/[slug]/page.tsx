@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import CaseStudyLayout from "@/components/CaseStudyLayout";
+import { Callout } from "@/components/callout";
 import { getAllCaseStudies, getCaseStudy } from "@/lib/mdx";
 import { CaseStudy } from "@/lib/types";
+
+const components = { Callout };
 
 export async function generateStaticParams() {
   return getAllCaseStudies().map((study: CaseStudy) => ({
@@ -42,7 +45,7 @@ export default async function CaseStudyPage({
 
   return (
     <CaseStudyLayout {...frontmatter!}>
-      <MDXRemote source={content!} />
+      <MDXRemote source={content!} components={components} />
     </CaseStudyLayout>
   );
 }
