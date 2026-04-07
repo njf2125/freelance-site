@@ -26,10 +26,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl px-6">
       {/* Hero */}
-      <section
-        className="py-20 sm:py-32 border-b border-[var(--border)]"
-        style={{ background: 'radial-gradient(ellipse 120% 60% at -10% 40%, rgba(45, 212, 191, 0.06) 0%, transparent 70%)' }}
-      >
+      <section className="py-20 sm:py-32 border-b border-[var(--border)]">
         <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
           <span className="block font-normal text-[var(--muted)]">
             That project living rent-free in your head?
