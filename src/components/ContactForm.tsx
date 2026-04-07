@@ -15,6 +15,8 @@ export default function ContactForm() {
 
     const form = e.currentTarget;
     const data = {
+      access_key: "REDACTED",
+      subject: "New inquiry — nickfig.dev",
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement)
@@ -22,7 +24,7 @@ export default function ContactForm() {
     };
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
