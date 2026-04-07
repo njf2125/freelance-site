@@ -3,19 +3,19 @@ import ContactForm from "@/components/ContactForm";
 
 const processSteps = [
   {
-    number: "01",
+    number: "1",
     title: "Discovery",
     description:
       "We start with a focused conversation about your problem, your users, and what success looks like. I ask the questions that surface hidden requirements before a line of code is written.",
   },
   {
-    number: "02",
+    number: "2",
     title: "Build",
     description:
       "I work in short cycles with frequent check-ins. You see real, working software early — not mockups — so feedback is grounded in reality.",
   },
   {
-    number: "03",
+    number: "3",
     title: "Launch",
     description:
       "Handoff includes deployment, documentation, and a walkthrough. I stay available for the first month to handle anything that comes up in production.",
@@ -26,26 +26,34 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl px-6">
       {/* Hero */}
-      <section className="py-16 sm:py-24 border-b border-[var(--border)]">
-        <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--accent)] mb-6">
-          Software Engineer
-        </p>
-        <h1 className="font-display text-5xl sm:text-6xl font-normal leading-[1.1] text-[var(--text)] tracking-tight [&>em]:text-[var(--accent)] [&>em]:italic [&>em]:not-italic">
-          I build <em>custom web apps</em> and dashboards for teams that have outgrown
-          their off-the-shelf tools.
-        </h1>
-        <p className="mt-8 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
-          Specializing in React and TypeScript. I work
-          with small teams to ship internal tools, dashboards, and SaaS products
-          that actually fit their workflow.
-        </p>
-        <div className="flex items-center gap-2 text-sm text-[var(--muted)] bg-[var(--surface)] border border-[var(--border)] rounded-md px-3 py-1.5 w-fit mb-8 mt-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-          <span>
-            <strong className="text-[var(--text)] font-medium">Projects from $2,500.</strong>
-            {" "}1–2 clients at a time.
+      <section className="py-20 sm:py-32 border-b border-[var(--border)]">
+        <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
+          <span className="block font-light text-[var(--muted)]">
+            That project living rent-free in your head?
           </span>
-        </div>
+          <span className="block font-bold text-[var(--text)]">
+            I&apos;m already thinking about the architecture.
+          </span>
+        </h1>
+
+        <p className="mt-10 text-xl text-[var(--muted)] leading-relaxed max-w-lg">
+          Some clients come with a detailed spec.
+          <br />
+          Some come with a napkin sketch.
+          <br />
+          Either way, we ship.
+        </p>
+
+        <p className="mt-6 text-sm text-[var(--faint)] max-w-lg leading-relaxed">
+          Specializing in React and TypeScript — working with small teams to build tools that actually fit their workflow.
+        </p>
+
+        <a
+          href="#contact"
+          className="mt-10 inline-flex items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--text)] transition-colors"
+        >
+          Let&apos;s talk about it →
+        </a>
       </section>
 
       {/* Selected Work */}
