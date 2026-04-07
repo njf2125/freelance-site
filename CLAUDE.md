@@ -19,12 +19,17 @@ A personal freelance portfolio site for a senior React/TypeScript frontend engin
 |---|---|
 | Framework | Next.js 14 (App Router) |
 | Language | TypeScript (strict mode) |
-| Styling | Tailwind CSS |
+| Styling | Tailwind CSS v4 (`@tailwindcss/postcss`) |
 | Content | MDX (for case studies) |
 | Deployment target | Cloudflare Pages |
-| Contact form backend | Cloudflare Worker (via Next.js API route) |
-| Email | Resend API |
+| Contact form backend | Web3Forms (no backend secret needed) |
 | Analytics | Cloudflare Web Analytics (script tag only, no config needed) |
+
+> **Deviations from original spec:**
+> - **Tailwind CSS v4** is in use (not v3). Config is in `globals.css` via `@theme` — no `tailwind.config.js`.
+> - **Web3Forms** replaces Resend for the contact form. No `RESEND_API_KEY` needed. Uses a Web3Forms access key in the POST body.
+> - **`WorkTable` component** is used instead of `ProjectCard` for listing case studies on both the home page and the work index.
+> - **Fonts** are Playfair Display (headings) + DM Sans (body) + DM Mono (labels/code), loaded via `next/font/google` — not Geist Sans/Mono as originally specified.
 
 ---
 
@@ -320,14 +325,9 @@ A sticky top navigation bar with links: **Work · About · Contact** (Contact sc
 
 Minimal footer with copyright year (use `new Date().getFullYear()`), GitHub link, and LinkedIn link. No nav repeat.
 
-### `src/components/ProjectCard.tsx`
+### `src/components/WorkTable.tsx` *(was `ProjectCard.tsx`)*
 
-Props: `title`, `subtitle`, `stack: string[]`, `slug`, `featured?: boolean`
-
-Renders a card with:
-- Project title and subtitle
-- Stack badges (small monospace pill for each)
-- A "View case study →" link to `/work/[slug]`
+Used in place of `ProjectCard`. Renders case studies as a table/list layout rather than a card grid. Used on both the home page (featured projects) and the work index.
 
 ### `src/components/ContactForm.tsx`
 
@@ -354,14 +354,14 @@ Root layout. Includes:
   ```html
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_TOKEN_HERE"}'></script>
   ```
-- Global font setup using `next/font` — use a clean sans-serif (e.g. Geist Sans) paired with a monospace (e.g. Geist Mono) for labels and code
+- Global font setup using `next/font/google` — Playfair Display (headings), DM Sans (body), DM Mono (labels/code)
 
 ### `src/app/page.tsx` — Home
 
 Sections in order:
 
 1. **Hero** — Positioning headline, 1–2 sentence description, a subtle pricing signal ("Projects typically start at $2,500."), and a CTA button that scrolls to the contact form
-2. **Work** — Heading "Selected Work", then a grid of `<ProjectCard />` components for both case studies (pull from `getAllCaseStudies()`, filter `featured: true`)
+2. **Work** — Heading "Selected Work", then `<WorkTable />` for featured case studies (pull from `getAllCaseStudies()`, filter `featured: true`)
 3. **Process** — Three steps: Discovery → Build → Launch. Each has a number, short title, and 1–2 sentence description. Keep it plain text, no icons.
 4. **Contact** — `<ContactForm />` with a short headline ("Got a project? Let's talk.") and a subline with your email as a plain mailto fallback
 
@@ -375,7 +375,7 @@ Content to include:
 
 ### `src/app/work/page.tsx` — Work Index
 
-Lists all case studies with `<ProjectCard />`. Pull from `getAllCaseStudies()`.
+Lists all case studies with `<WorkTable />`. Pull from `getAllCaseStudies()`.
 
 ### `src/app/work/[slug]/page.tsx` — Case Study
 
@@ -389,39 +389,9 @@ Generate static params from `getAllCaseStudies()`.
 
 ### `src/app/api/contact/route.ts`
 
-```ts
-import { Resend } from "resend";
-import { NextRequest, NextResponse } from "next/server";
+Uses **Web3Forms** instead of Resend. The `ContactForm` client component POSTs directly to the Web3Forms API (`https://api.web3forms.com/submit`) with a public access key. No server-side API route secret is required.
 
-export const runtime = "edge";
-
-export async function POST(req: NextRequest) {
-  const { name, email, message } = await req.json();
-
-  if (!name || !email || !message) {
-    return NextResponse.json({ error: "All fields required." }, { status: 400 });
-  }
-
-  const resend = new Resend(process.env.RESEND_API_KEY);
-
-  await resend.emails.send({
-    from: "portfolio@yourdomain.com", // replace with your verified Resend domain
-    to: "your@email.com",             // replace with your actual email
-    subject: `New inquiry from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-  });
-
-  return NextResponse.json({ success: true });
-}
-```
-
-Create `.env.local` with:
-
-```
-RESEND_API_KEY=your_resend_api_key_here
-```
-
-Add `.env.local` to `.gitignore` (already included above).
+No `.env.local` needed for the contact form. The Web3Forms access key is embedded in the form payload (it's a public key by design).
 
 ---
 
@@ -439,9 +409,9 @@ Apply these globally via Tailwind — do not use inline styles or a separate CSS
 - Amber: `amber-400` for secondary badges / stack pills
 
 **Typography:**
-- Display / headings: Geist Sans, heavy weight, tight tracking (`tracking-tight`)
-- Body: Geist Sans, regular weight
-- Labels, badges, code: Geist Mono
+- Display / headings: Playfair Display (serif), via `next/font/google`
+- Body: DM Sans, regular weight
+- Labels, badges, code: DM Mono
 
 **No animations on first pass.** Get the structure right, then layer in hover states and transitions in Phase 2.
 
@@ -453,7 +423,7 @@ Apply these globally via Tailwind — do not use inline styles or a separate CSS
 
 - [ ] `npm run build` passes with no TypeScript errors
 - [ ] All pages render without runtime errors (`npm run dev`)
-- [ ] Contact form POSTs successfully (test with a real Resend key)
+- [ ] Contact form POSTs successfully to Web3Forms
 - [ ] `/work/samepage` and `/work/recipe-bookmarks` both render correctly
 - [ ] No hardcoded personal info left as placeholder (replace email, GitHub, LinkedIn)
 - [ ] `.env.local` is NOT committed
@@ -480,7 +450,7 @@ Then connect the repo to Cloudflare Pages:
 2. Select the repo
 3. Build command: `npm run pages:build`
 4. Output directory: `.vercel/output/static`
-5. Add environment variable: `RESEND_API_KEY`
+5. No extra environment variables needed (Web3Forms uses a public access key)
 
 ---
 
@@ -494,6 +464,6 @@ These are out of scope for this phase — do not add them:
 - Authentication of any kind
 - Dark/light mode toggle (dark is the default, keep it)
 - Animation libraries (Framer Motion, etc.)
-- Third-party form services (Formspree, etc.)
+- Additional third-party form services beyond Web3Forms (already in use)
 
 These can be added in Phase 2 once the site is live.

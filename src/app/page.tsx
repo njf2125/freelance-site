@@ -1,7 +1,5 @@
-import WorkTable from "@/components/WorkTable";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import { getAllCaseStudies } from "@/lib/mdx";
-import { CaseStudy } from "@/lib/types";
 
 const processSteps = [
   {
@@ -25,8 +23,6 @@ const processSteps = [
 ];
 
 export default function Home() {
-  const featured = getAllCaseStudies().filter((p: CaseStudy) => p.featured);
-
   return (
     <main className="mx-auto max-w-4xl px-6">
       {/* Hero */}
@@ -43,14 +39,97 @@ export default function Home() {
           with small teams to ship internal tools, dashboards, and SaaS products
           that actually fit their workflow.
         </p>
+        <div className="flex items-center gap-2 text-sm text-[var(--muted)] bg-[var(--surface)] border border-[var(--border)] rounded-md px-3 py-1.5 w-fit mb-8 mt-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+          <span>
+            <strong className="text-[var(--text)] font-medium">Projects from $2,500.</strong>
+            {" "}1–2 clients at a time.
+          </span>
+        </div>
       </section>
 
       {/* Selected Work */}
-      <section className="py-16 sm:py-20 border-b border-[var(--border)]">
-        <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-8">
-          Selected Work
-        </h2>
-        <WorkTable projects={featured} />
+      <section className="mt-16">
+        <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-6">
+          Selected work
+        </p>
+
+        <div className="flex flex-col gap-3">
+          {/* Card 1 — Recipe Bookmarks */}
+          <Link href="/work/recipe-bookmarks">
+            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-5 grid grid-cols-[1fr_auto] gap-3 items-start transition-colors">
+              <div>
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-amber-950/40 text-amber-400 border-amber-800/60">
+                    Full-stack · AI
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-[var(--surface)] text-[var(--faint)] border-[var(--border)]">
+                    Edge infra
+                  </span>
+                  <span className="text-[11px] font-mono text-[var(--faint)]">2025</span>
+                </div>
+                <h3 className="font-medium text-[var(--text)] mb-1.5">Recipe Bookmarks</h3>
+                <p className="text-sm text-[var(--muted)] leading-relaxed mb-3">
+                  Server-side OG scraping, FTS5 full-text search at the edge, and an AI feature
+                  that parses handwritten grocery lists via Gemini Vision.
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["React", "TypeScript", "Cloudflare D1", "Workers", "Gemini Vision"].map((t) => (
+                    <span
+                      key={t}
+                      className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors mt-0.5">
+                →
+              </span>
+            </div>
+          </Link>
+
+          {/* Card 2 — SamePage */}
+          <Link href="/work/samepage">
+            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-5 grid grid-cols-[1fr_auto] gap-3 items-start transition-colors">
+              <div>
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-teal-950/40 text-teal-400 border-teal-800/60">
+                    PWA · Real-time
+                  </span>
+                  <span className="text-[11px] font-mono text-[var(--faint)]">2025</span>
+                </div>
+                <h3 className="font-medium text-[var(--text)] mb-1.5">SamePage</h3>
+                <p className="text-sm text-[var(--muted)] leading-relaxed mb-3">
+                  Collaborative reading tracker installable on iOS and Android. Includes a
+                  mid-production auth migration from Supabase to Firebase with no downtime.
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["React", "TypeScript", "Firebase Auth", "Firestore", "Cloudflare Pages"].map(
+                    (t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]"
+                      >
+                        {t}
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
+              <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors mt-0.5">
+                →
+              </span>
+            </div>
+          </Link>
+
+          {/* Placeholder card */}
+          <div className="border border-dashed border-[var(--border)] rounded-xl px-5 py-4 text-sm text-[var(--faint)]">
+            <span className="font-medium text-[var(--muted)]">Coming soon:</span>
+            {" "}A speculative concept — a custom internal dashboard built for a real business type.
+          </div>
+        </div>
       </section>
 
       {/* Process */}

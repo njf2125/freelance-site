@@ -6,6 +6,14 @@ problem: Two people reading the same book needed a shared space to log progress,
 whatWasBuilt: A Progressive Web App installable on iOS and Android, with real-time sync powered by Firestore listeners, shared reading state, comment threads, and invite-based access control. Migrated from Supabase to Firebase Auth + Firestore mid-development when requirements evolved — maintaining continuity in a live production app.
 outcome: A fully functional multi-user PWA used daily. Demonstrates end-to-end app architecture including auth, real-time data sync, mobile UX, and mid-project infrastructure decisions under real constraints.
 featured: true
+stats:
+  - label: "Status"
+    value: "Live · daily use"
+    highlight: true
+  - label: "Type"
+    value: "PWA · multi-user"
+  - label: "Infra cost"
+    value: "$0/mo"
 ---
 
 ## Background
@@ -28,9 +36,13 @@ A full-stack PWA with:
 
 ## Key Technical Decision
 
-Mid-development, I migrated from Supabase (PostgreSQL + Supabase Auth) to Firebase Auth + Firestore. The trigger was Supabase's free-tier inactivity pausing — a real production risk for a small personal app. I migrated auth and data while the app was in active use, with no downtime and no data loss.
-
-This required remapping the relational data model (books, comments, invites tables) to Firestore's document/collection structure — a meaningful architectural shift, not a swap of credentials.
+<Callout>
+**Mid-production migration: Supabase → Firebase Auth + Firestore.**
+Supabase's free-tier inactivity pausing was a real production risk.
+Migrated auth and data while the app was in active use — no downtime,
+no data loss — remapping a relational schema to Firestore's
+document/collection model.
+</Callout>
 
 ## Stack
 
