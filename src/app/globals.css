@@ -9,12 +9,18 @@
 
 :root {
   --bg: #09090b; /* zinc-950 */
+  --glow: radial-gradient(ellipse 80% 40% at 0% 0%, rgba(45, 212, 191, 0.06) 0%, transparent 100%);
   --surface: #18181b; /* zinc-900 */
   --border: #27272a; /* zinc-800 */
   --text: #fafafa; /* zinc-50 */
   --muted: #a1a1aa; /* zinc-400 */
   --faint: #52525b; /* zinc-600 */
   --accent: #2dd4bf; /* teal-400 */
+}
+
+body {
+  background: var(--glow), var(--bg);
+  background-attachment: fixed;
 }
 
 /* Grain texture overlay */
