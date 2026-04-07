@@ -15,7 +15,7 @@ The site targets potential clients who have outgrown off-the-shelf tools and nee
 | Styling | Tailwind CSS v4 (`@tailwindcss/postcss`) |
 | Content | MDX via `next-mdx-remote/rsc` + `gray-matter` |
 | Deployment | Cloudflare Pages |
-| Contact form | Web3Forms (public access key, no backend secret) |
+| Contact form | Web3Forms via `/api/contact` proxy route (`WEB3FORMS_KEY` env var) |
 | Analytics | Cloudflare Web Analytics (beacon script in layout) |
 
 **Tailwind v4 note:** There is no `tailwind.config.js`. Theme config lives in `globals.css` via `@theme`. Do not create a config file.
@@ -70,12 +70,12 @@ src/
     work/
       page.tsx              ← work index (lists all case studies via getAllCaseStudies())
       [slug]/page.tsx       ← dynamic case study page (MDXRemote + CaseStudyLayout)
-    api/contact/route.ts    ← Web3Forms proxy (currently unused — form posts directly)
+    api/contact/route.ts    ← Web3Forms proxy — reads WEB3FORMS_KEY from env, required in Cloudflare Pages settings
   components/
     Nav.tsx                 ← sticky top nav: Work · About · Contact
     Footer.tsx              ← copyright, "Built by me, obviously.", GitHub, LinkedIn
     CaseStudyLayout.tsx     ← case study wrapper: back-link, header, stats, 3-col callouts, MDX slot
-    ContactForm.tsx         ← "use client" form, posts to Web3Forms
+    ContactForm.tsx         ← "use client" form, posts to /api/contact
     WorkTable.tsx           ← used on /work index page
     callout.tsx             ← <Callout> MDX component for highlighted decisions
   content/work/
