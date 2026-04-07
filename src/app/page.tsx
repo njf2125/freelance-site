@@ -28,10 +28,10 @@ export default function Home() {
       {/* Hero */}
       <section className="py-20 sm:py-32 border-b border-[var(--border)]">
         <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
-          <span className="block font-light text-[var(--muted)]">
+          <span className="block font-normal text-[var(--muted)]">
             That project living rent-free in your head?
           </span>
-          <span className="block font-bold text-[var(--text)]">
+          <span className="block font-semibold text-[var(--text)]">
             I&apos;m already thinking about the architecture.
           </span>
         </h1>
