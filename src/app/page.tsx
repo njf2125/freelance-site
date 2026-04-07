@@ -56,30 +56,10 @@ export default function Home() {
         </a>
       </section>
 
-      {/* Selected Work */}
+      {/* Work */}
       <section className="mt-16 pb-16 border-b border-[var(--border)]">
         <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-6">
-          Selected work
-        </p>
-
-        <div className="border border-dashed border-[var(--border)] rounded-xl p-8 flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-            <span className="text-sm font-medium text-[var(--text)]">Currently booking</span>
-          </div>
-          <p className="text-sm text-[var(--faint)] max-w-sm leading-relaxed">
-            This space is for client work. The next project goes here.{" "}
-            <a href="#contact" className="text-[var(--accent)] hover:text-[var(--text)] transition-colors">
-              Let&apos;s talk.
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* Other Work */}
-      <section className="mt-16 pb-16 border-b border-[var(--border)]">
-        <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-6">
-          Other work
+          Work
         </p>
 
         <div className="flex flex-col gap-3">

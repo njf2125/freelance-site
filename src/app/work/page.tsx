@@ -16,7 +16,7 @@ export default function WorkIndex() {
       </p>
       <h1 className="font-display text-4xl sm:text-5xl font-normal tracking-tight text-[var(--text)] mb-6">Work</h1>
       <p className="text-lg text-[var(--muted)] leading-relaxed max-w-[480px] mb-12">
-        Selected projects from freelance and personal work.
+        Personal projects built outside of work.
       </p>
       <WorkTable projects={caseStudies} />
     </main>
