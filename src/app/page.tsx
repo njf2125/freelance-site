@@ -57,86 +57,75 @@ export default function Home() {
       </section>
 
       {/* Selected Work */}
-      <section className="mt-16">
+      <section className="mt-16 pb-16 border-b border-[var(--border)]">
         <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-6">
           Selected work
         </p>
 
+        <div className="border border-dashed border-[var(--border)] rounded-xl p-8 flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+            <span className="text-sm font-medium text-[var(--text)]">Currently booking</span>
+          </div>
+          <p className="text-sm text-[var(--faint)] max-w-sm leading-relaxed">
+            This space is for client work. The next project goes here.{" "}
+            <a href="#contact" className="text-[var(--accent)] hover:text-[var(--text)] transition-colors">
+              Let&apos;s talk.
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* Other Work */}
+      <section className="mt-16 pb-16 border-b border-[var(--border)]">
+        <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-6">
+          Other work
+        </p>
+
         <div className="flex flex-col gap-3">
-          {/* Card 1 — Recipe Bookmarks */}
           <Link href="/work/recipe-bookmarks">
-            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-5 grid grid-cols-[1fr_auto] gap-3 items-start transition-colors">
-              <div>
-                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-amber-950/40 text-amber-400 border-amber-800/60">
-                    Full-stack · AI
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-[var(--surface)] text-[var(--faint)] border-[var(--border)]">
-                    Edge infra
-                  </span>
-                  <span className="text-[11px] font-mono text-[var(--faint)]">2025</span>
-                </div>
-                <h3 className="font-medium text-[var(--text)] mb-1.5">Recipe Bookmarks</h3>
-                <p className="text-sm text-[var(--muted)] leading-relaxed mb-3">
-                  Server-side OG scraping, FTS5 full-text search at the edge, and an AI feature
-                  that parses handwritten grocery lists via Gemini Vision.
-                </p>
+            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg font-medium text-[var(--text)]">Recipe Bookmarks</h3>
+                <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">→</span>
+              </div>
+              <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
+                A recipe organizer that finds meals from what&apos;s already in your kitchen.
+              </p>
+              <div className="flex items-center justify-between">
                 <div className="flex flex-wrap gap-1.5">
                   {["React", "TypeScript", "Cloudflare D1", "Workers", "Gemini Vision"].map((t) => (
-                    <span
-                      key={t}
-                      className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]"
-                    >
+                    <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
                       {t}
                     </span>
                   ))}
                 </div>
+                <span className="text-[10px] font-mono text-[var(--faint)] ml-4 shrink-0">Full-stack · AI · 2025</span>
               </div>
-              <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors mt-0.5">
-                →
-              </span>
             </div>
           </Link>
 
-          {/* Card 2 — SamePage */}
           <Link href="/work/samepage">
-            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-5 grid grid-cols-[1fr_auto] gap-3 items-start transition-colors">
-              <div>
-                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-teal-950/40 text-teal-400 border-teal-800/60">
-                    PWA · Real-time
-                  </span>
-                  <span className="text-[11px] font-mono text-[var(--faint)]">2025</span>
-                </div>
-                <h3 className="font-medium text-[var(--text)] mb-1.5">SamePage</h3>
-                <p className="text-sm text-[var(--muted)] leading-relaxed mb-3">
-                  Collaborative reading tracker installable on iOS and Android. Includes a
-                  mid-production auth migration from Supabase to Firebase with no downtime.
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {["React", "TypeScript", "Firebase Auth", "Firestore", "Cloudflare Pages"].map(
-                    (t) => (
-                      <span
-                        key={t}
-                        className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]"
-                      >
-                        {t}
-                      </span>
-                    )
-                  )}
-                </div>
+            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg font-medium text-[var(--text)]">SamePage</h3>
+                <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">→</span>
               </div>
-              <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors mt-0.5">
-                →
-              </span>
+              <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
+                A collaborative reading tracker built for two people to stay on the same page.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex flex-wrap gap-1.5">
+                  {["React", "TypeScript", "Firebase Auth", "Firestore", "Cloudflare Pages"].map((t) => (
+                    <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <span className="text-[10px] font-mono text-[var(--faint)] ml-4 shrink-0">PWA · Real-time · 2025</span>
+              </div>
             </div>
           </Link>
-
-          {/* Placeholder card */}
-          <div className="border border-dashed border-[var(--border)] rounded-xl px-5 py-4 text-sm text-[var(--faint)]">
-            <span className="font-medium text-[var(--muted)]">Coming soon:</span>
-            {" "}A speculative concept — a custom internal dashboard built for a real business type.
-          </div>
         </div>
       </section>
 
@@ -166,10 +155,13 @@ export default function Home() {
 
       {/* Contact */}
       <section id="contact" className="py-16 sm:py-20">
-        <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-8">
-          Got a project? Let&apos;s talk.
+        <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)]">
+          Got something in mind?
         </h2>
-        <div className="max-w-2xl">
+        <p className="mt-2 text-lg text-[var(--muted)]">
+          Let&apos;s figure out if it&apos;s a good fit.
+        </p>
+        <div className="max-w-2xl mt-8">
           <ContactForm />
         </div>
       </section>
