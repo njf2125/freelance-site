@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About — nickfig.dev",
+  description:
+    "QA engineer turned software engineer. I take on freelance work for teams that need custom dashboards, internal tools, and full-stack web apps built with React and TypeScript.",
+  openGraph: {
+    title: "About — nickfig.dev",
+    description:
+      "QA engineer turned software engineer. I take on freelance work for teams that need custom dashboards, internal tools, and full-stack web apps built with React and TypeScript.",
+  },
 };
 
 export default function About() {

@@ -4,6 +4,13 @@ import { getAllCaseStudies } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "Work — nickfig.dev",
+  description:
+    "Personal projects by Nick Figliolia: a recipe-saving app with AI grocery list parsing, a collaborative reading tracker PWA, and more.",
+  openGraph: {
+    title: "Work — nickfig.dev",
+    description:
+      "Personal projects by Nick Figliolia: a recipe-saving app with AI grocery list parsing, a collaborative reading tracker PWA, and more.",
+  },
 };
 
 export default function WorkIndex() {
