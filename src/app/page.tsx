@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl px-6">
       {/* Hero */}
-      <section className="py-20 sm:py-32 border-b border-[var(--border)]">
+      <section className="py-14 sm:py-20 border-b border-[var(--border)]">
         <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
           <span className="block font-normal text-[var(--muted)]">
             That project living rent-free in your head?
@@ -57,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* Work */}
-      <section className="mt-16 pb-16 border-b border-[var(--border)]">
+      <section className="mt-10 pb-10 border-b border-[var(--border)]">
         <p className="text-xs font-mono text-[var(--accent)] uppercase tracking-widest mb-6">
           Work
         </p>
@@ -110,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* Process */}
-      <section className="py-16 sm:py-20 border-b border-[var(--border)]">
+      <section className="py-10 sm:py-14 border-b border-[var(--border)]">
         <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)] mb-12">
           How I Work
         </h2>
@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-16 sm:py-20">
+      <section id="contact" className="py-10 sm:py-14">
         <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)]">
           Got something in mind?
         </h2>
