@@ -21,7 +21,13 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const { frontmatter } = getCaseStudy(slug);
-    return { title: `${frontmatter.title} — nickfig.dev` };
+    const title = `${frontmatter.title} — nickfig.dev`;
+    const description = frontmatter.problem;
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+    };
   } catch {
     return { title: "Not Found" };
   }
