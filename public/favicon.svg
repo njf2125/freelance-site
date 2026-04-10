@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="102" fill="#09090b"/>
+  <!-- Monogram -->
+  <text
+    x="256"
+    y="358"
+    text-anchor="middle"
+    font-family="'Playfair Display', Georgia, serif"
+    font-weight="400"
+    font-size="264"
+    letter-spacing="26"
+    fill="#2dd4bf"
+    dx="13"
+  >nf</text>
+</svg>
