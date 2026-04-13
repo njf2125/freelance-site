@@ -63,6 +63,28 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col gap-3">
+          <a href="https://clientroom.app" target="_blank" rel="noopener noreferrer" className="block">
+            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg font-medium text-[var(--text)]">Client Room</h3>
+                <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">↗</span>
+              </div>
+              <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
+                A private portal for every client. Instead of scattered email threads, each client gets their own room — messaging, shared files, milestones, and invoices in one place. Clients access it via a private link. No account required on their end.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex flex-wrap gap-1.5">
+                  {["Supabase", "Stripe", "Cloudflare Pages"].map((t) => (
+                    <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <span className="text-[10px] font-mono text-[var(--accent)] ml-4 shrink-0">clientroom.app ↗</span>
+              </div>
+            </div>
+          </a>
+
           <Link href="/work/recipe-bookmarks">
             <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
               <div className="flex items-center justify-between mb-3">
