@@ -1,10 +1,10 @@
 ---
 title: SamePage
 subtitle: Collaborative reading tracker PWA
-stack: [React, TypeScript, Vite, Firebase Auth, Firestore, Cloudflare Pages, PWA]
+stack: [React 19, TypeScript, Vite, Firebase Auth, Firestore, Cloudflare Pages]
 problem: Two people reading the same book needed a shared space to log progress, leave notes, and stay in sync — without spreadsheets or constant texting. No existing app supported the lightweight collaborative workflow they needed.
-whatWasBuilt: A Progressive Web App installable on iOS and Android, with real-time sync powered by Firestore listeners, shared reading state, comment threads, and invite-based access control. Migrated from Supabase to Firebase Auth + Firestore mid-development when requirements evolved — maintaining continuity in a live production app.
-outcome: A fully functional multi-user PWA used daily. Demonstrates end-to-end app architecture including auth, real-time data sync, mobile UX, and mid-project infrastructure decisions under real constraints.
+whatWasBuilt: A single-page React app with real-time multiplayer sync. Users can join a reading group, log their progress, and leave comments. The app includes a "spoiler lock" feature that blurs comments ahead of a reader's current progress, and uses the Open Library API for book discovery.
+outcome: A fully functional multi-user PWA used daily. Demonstrates end-to-end app architecture including auth, real-time data sync, multiplayer features, and mobile UX.
 featured: true
 stats:
   - label: "Status"
@@ -22,28 +22,24 @@ SamePage started as a personal project: a way for two people to track their read
 
 ## The Problem
 
-Existing reading apps are built for solo readers. There was no lightweight, shared-first reading tracker that felt like a proper app — not a Notion page, not a spreadsheet, not a group chat thread.
+Existing reading apps are built for solo readers. There was no lightweight, shared-first reading tracker that felt like a proper app — not a Notion page, not a spreadsheet, not a group chat thread. 
 
 ## What I Built
 
-A full-stack PWA with:
+A full-stack single-page application built with React 19, TypeScript, and Vite, featuring:
 
-- **Firebase Auth** for email-based authentication (invite-only access)
-- **Firestore** with real-time listeners for live reading state sync between users
-- **PWA manifest + service worker** for home screen installation on iOS and Android
-- **Comment threads** per book for shared annotations
-- **Invite system** to add collaborators without open registration
+- **Real-time Multiplayer:** Firestore `onSnapshot` listeners power live sync for both reading progress (debounced to avoid excessive writes) and comment threads. Fellow travelers are updated instantly.
+- **Spoiler Lock:** A custom feature that calculates a reader's current progress and automatically blurs comments left at a location more than 2 units ahead of them.
+- **Invite-only Auth System:** Firebase Auth handles the actual authentication, but sign-ups are gated behind an invite system. Designated admins can generate expiring invite links (`?invite=<token>`).
+- **Book Discovery:** Integrated the Open Library public API (`openlibrary.org/search.json`) for instant book search with `AbortController` to cancel stale requests.
 
 ## Key Technical Decision
 
 <Callout>
-**Mid-production migration: Supabase → Firebase Auth + Firestore.**
-Supabase's free-tier inactivity pausing was a real production risk.
-Migrated auth and data while the app was in active use — no downtime,
-no data loss — remapping a relational schema to Firestore's
-document/collection model.
+**Real-time sync over a complex state manager.**
+Instead of implementing a heavy client-side state management library like Redux, I relied entirely on Firestore's real-time listeners (`onSnapshot`) combined with custom hooks. This ensures the UI is a direct reflection of the database state, making multiplayer features like the "fellow travelers" progress bar trivial to implement and keeping the architecture incredibly lean.
 </Callout>
 
 ## Stack
 
-React + TypeScript + Vite · Firebase Auth · Firestore · Cloudflare Pages · PWA
+React 19 + TypeScript + Vite · Firebase Auth · Firestore · Cloudflare Pages · Tailwind CSS
