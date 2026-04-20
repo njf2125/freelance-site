@@ -1,46 +1,46 @@
 ---
 title: Recipe Bookmarks
-subtitle: Full-stack recipe saving app with AI grocery list parsing
-stack: [React, TypeScript, Cloudflare Pages, Cloudflare D1, Cloudflare Workers, Gemini Vision]
+subtitle: Full-stack recipe saving PWA with edge functions
+stack: [React 18, TypeScript, Cloudflare Pages, Cloudflare D1, Cloudflare Workers]
 problem: A user needed to save, organize, and search recipes from across the web — with rich link previews, multi-category tagging, and fast keyword search — without a SaaS subscription or recurring cost.
-whatWasBuilt: A full-stack web app with server-side link previews that auto-populate title and image, fast keyword search across all saved recipes, multi-category tagging, two-tier auth (user vs admin), and an AI-powered grocery list feature using Gemini Vision to parse photos of handwritten lists into structured ingredient data.
-outcome: A production app used daily, running entirely on Cloudflare's free tier. Demonstrates full-stack architecture, AI feature integration, custom auth, and edge database design — with zero ongoing infrastructure cost.
+whatWasBuilt: A full-stack web app running on Cloudflare's edge infrastructure. Features include server-side OG tag scraping, automated dead-link checking via Cron jobs, full-text search with D1, and a Web Share Target implementation for Android share-sheets.
+outcome: A production PWA used daily, running entirely on Cloudflare's free tier. Demonstrates full-stack architecture, custom auth, edge database design, and advanced PWA features — with zero ongoing infrastructure cost.
 featured: true
 stats:
   - label: "Status"
     value: "Live · personal use"
     highlight: true
   - label: "Type"
-    value: "Full-stack · AI"
-  - label: "Search"
-    value: "Fast keyword search"
+    value: "Full-stack PWA"
+  - label: "Database"
+    value: "Cloudflare D1"
 ---
 
 ## Background
 
-This started as a practical problem: saving recipes from across the web in a way that's actually useful — with previews, categories, and search — without paying $10/month for a tool that does 80% of what's needed.
+This started as a practical problem: saving recipes from across the web in a way that's actually useful — with previews, categories, and search — without paying a monthly fee for a tool that does 80% of what's needed.
 
 ## The Problem
 
-Generic bookmark tools don't understand recipes. There's no category structure, no ingredient context, and no admin layer for managing the library. The only option was to build it.
+Generic bookmark tools don't understand recipes. There's no category structure, no ingredient context, and no admin layer for managing the library. Furthermore, links break over time, leading to lost recipes.
 
 ## What I Built
 
-A full-stack web app on Cloudflare's edge infrastructure:
+A full-stack Progressive Web App running on Cloudflare Pages and Workers:
 
-- **Open Graph scraping** via a Cloudflare Worker — paste a URL, get title, image, and description automatically
-- **Multi-category tagging** with a junction table in D1 (SQLite at the edge)
-- **Keyword search** across recipe titles, descriptions, and notes — built into the database, no external service needed
-- **Two-tier auth** — a shared user password for the main app, a separate admin password for category management and bulk operations
-- **AI grocery list parsing** — Gemini Vision (`gemini-2.5-flash`) reads a photo of a handwritten grocery list and returns structured ingredient data, persisted to D1
+- **Server-Side Open Graph Scraping:** A Cloudflare Worker automatically fetches the URL and parses OG tags and JSON-LD data to populate the title and image. It uses a mobile Safari User-Agent to bypass certain social media restrictions.
+- **Automated Link Checking:** Two separate systems ensure links stay alive: a background check runs on admin login, and a weekly GitHub Actions cron job calls an edge endpoint to test all URLs, emailing a report via Resend if any links return a 405/404.
+- **Built-in Full Text Search:** Uses SQLite's FTS5 virtual table on Cloudflare D1. The database auto-syncs the `recipes_fts` table via triggers, providing fast keyword search across titles and notes without an external search service.
+- **PWA Web Share Target:** On Android, the app integrates directly with the OS share-sheet. Sharing a link from a browser sends it directly to the app's `ShareReceiver` component, parsing the URL and opening the Add Recipe form automatically.
+- **Custom Auth:** Implemented a lightweight auth system using PBKDF2 password hashing and HTTP-only JWT session cookies, with distinct user and admin roles.
 
 ## Key Technical Decision
 
 <Callout>
-**Built search into the database instead of adding a third-party search service.**
-Using SQLite's built-in full-text search kept costs at zero and eliminated an external dependency — at the cost of less sophisticated relevance ranking. For a personal recipe app, that tradeoff is worth it. The AI grocery feature was added post-launch as a self-contained endpoint: send a photo, get back a structured ingredient list. No restructuring of the existing app required.
+**Building search into the database instead of adding a third-party service.**
+Using SQLite's built-in FTS5 full-text search kept costs at zero and eliminated an external dependency — at the cost of less sophisticated relevance ranking. For a personal recipe app, that tradeoff is worth it, keeping the entire application self-contained on Cloudflare's edge infrastructure.
 </Callout>
 
 ## Stack
 
-React + TypeScript · Cloudflare Pages · Cloudflare D1 (SQLite) · Cloudflare Workers · Gemini Vision API
+React 18 + TypeScript · Vite · Cloudflare Pages · Cloudflare D1 (SQLite FTS5) · Cloudflare Workers · Tailwind CSS v3
