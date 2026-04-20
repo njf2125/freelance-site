@@ -87,7 +87,7 @@ export default function CaseStudyLayout({
         </div>
       </div>
 
-      <div className="mt-16 prose max-w-none prose-p:text-[var(--muted)] prose-p:leading-loose prose-headings:font-display prose-headings:font-normal prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-strong:font-medium">
+      <div className="mt-16 prose max-w-none prose-p:text-[var(--muted)] prose-p:leading-loose prose-headings:font-display prose-headings:font-normal prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-strong:font-medium prose-li:text-[var(--muted)] prose-ul:text-[var(--muted)]">
         {children}
       </div>
     </main>
