@@ -35,13 +35,22 @@ export const metadata: Metadata = {
     description:
       "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
     url: "https://nickfig.dev",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nick Figliolia — Freelance React Engineer",
+      },
+    ],
   },
 
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "nickfig.dev — Nick Figliolia, Freelance React Engineer",
     description:
-      "React/TypeScript engineer available for freelance work.",
+      "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
+    images: ["/opengraph-image.png"],
   },
 };
 
