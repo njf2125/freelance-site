@@ -1,6 +1,6 @@
 # Freelance Portfolio Site — nickfig.dev
 
-Personal freelance portfolio for Nick Figliolia — a senior React/TypeScript frontend engineer available for custom web app and dashboard work on the side of his day job at nCino.
+Personal freelance portfolio for Nick Figliolia — a React/TypeScript frontend engineer available for custom web app and dashboard work on the side of his day job at nCino.
 
 The site targets potential clients who have outgrown off-the-shelf tools and need something built for them specifically.
 

@@ -21,7 +21,7 @@ export default function About() {
           </p>
           <h1 className="text-3xl font-medium tracking-tight text-[var(--text)] mb-1">Nick Figliolia</h1>
           <p className="text-sm font-mono text-[var(--muted)] mb-6">
-            Senior Frontend Engineer · nCino
+            Software Engineer · nCino
           </p>
 
           <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">

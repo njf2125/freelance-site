@@ -27,13 +27,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://nickfig.dev"),
   title: "nickfig.dev — Nick Figliolia, Freelance React Engineer",
   description:
-    "Senior React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
+    "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
   openGraph: {
     type: "website",
     siteName: "nickfig.dev",
     title: "nickfig.dev — Nick Figliolia, Freelance React Engineer",
     description:
-      "Senior React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
+      "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
     url: "https://nickfig.dev",
   },
   twitter: {
