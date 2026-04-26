@@ -88,7 +88,7 @@ dist/
 Create `.env.local` at the project root:
 
 ```
-RESEND_API_KEY=re_hcufX8fF_4A8cWqr84XZQUXen2QNHa3sh
+RESEND_API_KEY=your_resend_api_key_here
 ```
 
 Do NOT commit this file. It is already in .gitignore.
