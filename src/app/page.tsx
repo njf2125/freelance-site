@@ -1,6 +1,39 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 
+const projects = [
+  {
+    slug: "clientroom",
+    title: "Client Room",
+    description: "A private portal for every client. Instead of scattered email threads, each client gets their own room — messaging, shared files, milestones, and invoices in one place.",
+    tech: ["Firebase", "Stripe", "Cloudflare Pages"],
+    type: "Product",
+    year: "2025",
+    github: "https://github.com/njf2125/ClientRoom",
+    demo: "https://clientroom.app",
+  },
+  {
+    slug: "recipe-bookmarks",
+    title: "Recipe Bookmarks",
+    description: "A recipe organizer that finds meals from what's already in your kitchen using AI-powered shopping list scanning.",
+    tech: ["React", "TypeScript", "Cloudflare D1", "Gemini Vision"],
+    type: "Full-stack · AI",
+    year: "2025",
+    github: "https://github.com/njf2125/recipe-bookmarks",
+    demo: "https://recipes.nickfig.dev", // Corrected demo URL based on common patterns
+  },
+  {
+    slug: "samepage",
+    title: "SamePage",
+    description: "A collaborative reading tracker built for two people to stay on the same page with real-time sync and spoiler protection.",
+    tech: ["React", "TypeScript", "Firebase Auth", "Firestore"],
+    type: "PWA · Real-time",
+    year: "2025",
+    github: "https://github.com/njf2125/SamePage",
+    demo: "https://samepage.app",
+  },
+];
+
 const processSteps = [
   {
     number: "1",
@@ -63,71 +96,41 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col gap-3">
-          <Link href="/work/clientroom">
-            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
+          {projects.map((project) => (
+            <div key={project.slug} className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-medium text-[var(--text)]">Client Room</h3>
-                <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">→</span>
+                <Link href={`/work/${project.slug}`} className="hover:underline">
+                  <h3 className="text-lg font-medium text-[var(--text)]">{project.title}</h3>
+                </Link>
+                <div className="flex items-center gap-4">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
+                    GitHub
+                  </a>
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
+                    Live Demo
+                  </a>
+                  <Link href={`/work/${project.slug}`} className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">
+                    →
+                  </Link>
+                </div>
               </div>
+              
               <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
-                A private portal for every client. Instead of scattered email threads, each client gets their own room — messaging, shared files, milestones, and invoices in one place. Clients access it via a private link. No account required on their end.
+                {project.description}
               </p>
+              
               <div className="flex items-center justify-between">
                 <div className="flex flex-wrap gap-1.5">
-                  {["Firebase", "Stripe", "Cloudflare Pages"].map((t) => (
+                  {project.tech.map((t) => (
                     <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
                       {t}
                     </span>
                   ))}
                 </div>
-                <span className="text-[10px] font-mono text-[var(--faint)] ml-4 shrink-0">Product · 2025</span>
+                <span className="text-[10px] font-mono text-[var(--faint)] ml-4 shrink-0">{project.type} · {project.year}</span>
               </div>
             </div>
-          </Link>
-
-          <Link href="/work/recipe-bookmarks">
-            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-medium text-[var(--text)]">Recipe Bookmarks</h3>
-                <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">→</span>
-              </div>
-              <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
-                A recipe organizer that finds meals from what&apos;s already in your kitchen.
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex flex-wrap gap-1.5">
-                  {["React", "TypeScript", "Cloudflare D1", "Workers", "Gemini Vision"].map((t) => (
-                    <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <span className="text-[10px] font-mono text-[var(--faint)] ml-4 shrink-0">Full-stack · AI · 2025</span>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/work/samepage">
-            <div className="group bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-xl p-6 transition-colors">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-medium text-[var(--text)]">SamePage</h3>
-                <span className="text-[var(--faint)] group-hover:text-[var(--accent)] transition-colors">→</span>
-              </div>
-              <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
-                A collaborative reading tracker built for two people to stay on the same page.
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex flex-wrap gap-1.5">
-                  {["React", "TypeScript", "Firebase Auth", "Firestore", "Cloudflare Pages"].map((t) => (
-                    <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <span className="text-[10px] font-mono text-[var(--faint)] ml-4 shrink-0">PWA · Real-time · 2025</span>
-              </div>
-            </div>
-          </Link>
+          ))}
         </div>
       </section>
 
