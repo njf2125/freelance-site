@@ -1,46 +1,50 @@
 ---
 title: Client Room
-subtitle: One room per client. Files, messages, timelines, and invoices in one clean link.
-stack: [React 19, TypeScript, Vite, Tailwind CSS, Firebase, Stripe]
-problem: Freelancers and vendors who work one-on-one with clients often face scattered email threads. Files get lost, milestones are unclear, and invoices are handled in yet another system.
-whatWasBuilt: A private portal for every client. Instead of scattered email threads, each client gets their own room — messaging, shared files, milestones, and invoices in one place. Clients access it via a private link without needing to create an account.
-outcome: A unified client portal built with React, Vite, and Firebase for creatives and event vendors, featuring a warm, editorial aesthetic.
+subtitle: Client portal for freelancers — one room per client, no client accounts required
+stack: [React 19, TypeScript, Vite, Firebase, Firestore, Stripe, Cloud Functions, Cloudflare Pages]
+problem: Freelancers managing multiple clients lose time to scattered email threads, misplaced files, and chasing invoice payments — with no single place to track where a project actually stands.
+whatWasBuilt: A full-stack client portal where freelancers create a private room per client — with real-time messaging, file sharing, milestone tracking, and Stripe-powered invoice payments. Clients access their room via a unique token URL with no account or login required. Built on Firebase, Stripe, and Cloudflare Pages.
+outcome: A production app at clientroom.app, used by freelancers and event vendors who work one-on-one with clients. Demonstrates real-time architecture, secure accountless access, Stripe payment integration, and full-stack Firebase development.
 featured: true
 stats:
   - label: "Status"
-    value: "Product · 2025"
+    value: "Live · clientroom.app"
     highlight: true
-  - label: "Type"
-    value: "Client Portal SaaS"
-  - label: "Access"
-    value: "Accountless client flow"
+  - label: "Client auth"
+    value: "Token URL, no login"
+  - label: "Payments"
+    value: "Stripe Checkout"
 ---
 
 ## Background
 
-Creatives and event vendors working one-on-one with clients need a simple way to keep everything organized. But most project management tools are too complex, and email threads quickly become a mess.
+Freelancers send too many emails. Project updates in Gmail, files in Google Drive, invoices in Wave, milestone check-ins in Notion. Clients bounce between five tools and still reply to the wrong thread.
+
+Client Room gives each client a single private URL that holds everything related to their project — messages, files, milestones, and invoices — in one place.
 
 ## The Problem
 
-When working with clients, communication happens over email, files are shared via Google Drive or Dropbox, and invoices are sent through Stripe or Quickbooks. The client has to keep track of multiple links and systems, which leads to confusion and delays. Moreover, asking clients to create yet another account just to view their project is a point of friction.
+Off-the-shelf client portals either require clients to create accounts (friction that kills adoption) or bundle so many features they stop feeling lightweight. The goal was a minimal, opinionated tool: one room per client, accessible by link, with exactly what a freelance engagement needs and nothing else.
 
 ## What I Built
 
-A single room for each client. Everything related to their project lives in one place, accessible via a private, secure link. 
+A full-stack client portal on Firebase:
 
-- **Two Distinct Flows:** Freelancers authenticate via Firebase Auth (email/password or Google OAuth) to manage their rooms from a dashboard. Clients, on the other hand, are completely accountless. They access their specific room via a unique 24-character token URL.
-- **Real-time Messaging:** Built-in chat using Firestore's realtime capabilities (`onSnapshot`) synced directly to the React Query cache, ensuring all communication stays within the context of the project.
-- **File Sharing & Milestones:** Securely share deliverables, contracts, and assets. Clear timelines so clients always know what happens next.
-- **Invoices:** Integrated payments handled securely via Stripe.
-- **Editorial Aesthetic:** Designed specifically for creatives. The UI features a warm, editorial look using serif fonts (Cormorant Garamond) for headings and sans-serif (Jost) for body text. It deliberately avoids rounded corners for a sharp, sophisticated feel, complemented by a subtle noise texture overlay.
+- **Token-gated rooms** — each client gets a unique link with a 24-character token. Click the link, you're in. No signup, no password, no app to install.
+- **Real-time messaging** via Firestore `onSnapshot`, feeding React Query's cache directly — messages appear instantly without a separate fetch layer
+- **File sharing** — both sides can upload; files live in Firebase Storage with the client token encoded in the path as a server-side guard
+- **Milestone tracking** — ordered milestones with status progression to keep projects on track
+- **Invoice payments** — line-item invoices with Stripe Checkout; a Cloud Function webhook marks invoices paid automatically on completion
+- **Link recovery** — clients who lose their room link submit their email; a Cloud Function looks up matching rooms and resends the links via email
+- **Freelancer dashboard** — activity badges surface overdue invoices and unread client messages across all rooms
 
 ## Key Technical Decision
 
 <Callout>
-**Accountless Client Access and Single State Layer.**
-To remove friction, clients never create an account; their access is token-gated at the data level and stored in `sessionStorage`. For the architecture, I chose to use TanStack React Query as the *only* state management layer—eschewing Context or Redux—to seamlessly sync server state and Firestore realtime listeners into the UI.
+**Accountless clients via token URLs instead of magic links or guest authentication.**
+Requiring clients to create accounts — even frictionless ones — adds a step that kills adoption for a tool built around simplicity. The token is a cryptographically random 24-character string. Firestore security rules verify it on every client write by looking up the parent room. Storage paths encode the token as a path segment since Storage rules can't read Firestore — a deliberate tradeoff that keeps file uploads fast without routing them through Cloud Functions.
 </Callout>
 
 ## Stack
 
-React 19 + TypeScript · Vite · React Router v7 · TanStack React Query v5 · Tailwind CSS · Firebase (Auth, Firestore, Storage) · Stripe
+React 19 + TypeScript + Vite · Firebase Auth · Firestore · Firebase Storage · Cloud Functions · Stripe Checkout · Cloudflare Pages

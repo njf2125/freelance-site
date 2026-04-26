@@ -74,7 +74,7 @@ export default function Home() {
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex flex-wrap gap-1.5">
-                  {["React", "Firebase", "Stripe"].map((t) => (
+                  {["Firebase", "Stripe", "Cloudflare Pages"].map((t) => (
                     <span key={t} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[var(--bg)] text-[var(--faint)] border border-[var(--border)]">
                       {t}
                     </span>
