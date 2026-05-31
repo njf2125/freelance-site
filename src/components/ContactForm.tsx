@@ -114,8 +114,8 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="self-start rounded-md px-6 py-3 text-sm font-medium text-white transition-opacity disabled:opacity-50"
-        style={{ backgroundColor: "var(--accent)" }}
+        className="self-start rounded-md px-6 py-3 text-sm font-medium transition-opacity disabled:opacity-50"
+        style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}
       >
         {status === "loading" ? "Sending..." : "Send message"}
       </button>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About — nickfig.dev",
@@ -11,60 +12,96 @@ export const metadata: Metadata = {
   },
 };
 
+const STACK = [
+  "React", "TypeScript", "Next.js", "Vite",
+  "Cloudflare Pages", "Workers", "D1", "Firebase", "Firestore", "Stripe",
+];
+
 export default function About() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-8 md:gap-12 items-start">
+
+      {/* Page header */}
+      <div className="mb-12">
+        <p className="text-xs font-mono text-[var(--accent)] uppercase tracking-widest mb-3">
+          About
+        </p>
+        <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-[var(--text)]">
+          Nick Figliolia
+        </h1>
+        <p className="font-mono text-sm mt-2" style={{ color: "var(--accent)" }}>
+          Software Engineer · React &amp; TypeScript
+        </p>
+      </div>
+
+      {/* 2-col grid */}
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_280px] md:gap-14 items-start">
+
+        {/* Bio */}
         <div>
-          <p className="text-xs font-mono text-[var(--muted)] uppercase tracking-widest mb-3">
-            About
-          </p>
-          <h1 className="text-3xl font-medium tracking-tight text-[var(--text)] mb-1">Nick Figliolia</h1>
-          <p className="text-sm font-mono text-[var(--muted)] mb-6">
-            Software Engineer
+          <p
+            className="font-display text-2xl font-medium leading-snug mb-7"
+            style={{ color: "var(--text)" }}
+          >
+            I started in quality assurance, which means I think about what breaks
+            before it does — not just whether something works when everything goes right.
           </p>
 
-          <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
-            I started in quality assurance, which means I think about what breaks before
-            it does — not just whether something works when everything goes right.
-          </p>
-          <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
+          <p className="text-base text-[var(--muted)] leading-relaxed mb-4">
             On the side I take on freelance work for teams that need{" "}
-            <strong className="text-[var(--text)] font-medium">
+            <strong className="text-[var(--text)] font-semibold">
               custom dashboards, internal tools, and full-stack web apps
-            </strong>
-            {" "}— things that have outgrown off-the-shelf software.
-          </p>
-          <p className="text-sm text-[var(--muted)] leading-relaxed mb-6">
-            Personal projects: SamePage (collaborative reading tracker, live on iOS and Android),
-            Client Room (client portal for freelancers with Stripe-powered invoicing), and CDR Dashboard
-            (real-time job tracker built for a repair workshop).
+            </strong>{" "}
+            — things that have outgrown off-the-shelf software.
           </p>
 
-          <p className="text-[10px] font-mono text-[var(--muted)] uppercase tracking-widest mb-2">
+          <p className="text-base text-[var(--muted)] leading-relaxed mb-4">
+            Recent builds: <strong className="text-[var(--text)] font-medium">SamePage</strong>,
+            a collaborative reading tracker live on iOS and Android;{" "}
+            <strong className="text-[var(--text)] font-medium">Client Room</strong>,
+            a portal for freelancers with Stripe-powered invoicing; and the{" "}
+            <strong className="text-[var(--text)] font-medium">CDR Dashboard</strong>,
+            a real-time job tracker built for a repair workshop.
+          </p>
+
+          <p className="text-base text-[var(--muted)] leading-relaxed mb-8">
+            I work in short cycles with frequent check-ins, so you see real, working software
+            early — not mockups. Handoff always includes deployment, documentation, and a walkthrough.
+          </p>
+
+          <p className="text-[10px] font-mono text-[var(--faint)] uppercase tracking-widest mb-3">
             Stack I reach for
           </p>
           <div className="flex flex-wrap gap-1.5">
-            {["React", "TypeScript", "Next.js", "Cloudflare Pages", "Workers", "D1", "Firebase"].map(
-              (t) => (
-                <span
-                  key={t}
-                  className="text-xs font-mono px-2 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)]"
-                >
-                  {t}
-                </span>
-              )
-            )}
+            {STACK.map((t) => (
+              <span
+                key={t}
+                className="text-xs font-mono px-2 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)]"
+              >
+                {t}
+              </span>
+            ))}
           </div>
         </div>
 
+        {/* Right rail */}
         <div className="flex flex-col gap-4">
-          <div className="bg-[var(--surface)] rounded-xl p-4">
-            <p className="text-[10px] font-mono text-[var(--muted)] uppercase tracking-widest mb-2">
+
+          {/* Portrait — replace src with your actual photo path */}
+          <img
+            src="/portrait.jpg"
+            alt="Nick Figliolia"
+            className="w-full rounded-xl object-cover"
+            style={{ height: "280px" }}
+          />
+
+          {/* Availability card */}
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4">
+            <p className="text-[10px] font-mono text-[var(--faint)] uppercase tracking-widest mb-3">
               Availability
             </p>
-            <div className="flex items-center gap-2 text-sm font-medium text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-[var(--accent)]">
+              <span className="w-2 h-2 rounded-full bg-[var(--accent)] shrink-0" />
               Open to projects
             </div>
             <p className="text-xs text-[var(--muted)] mt-2 leading-relaxed">
@@ -72,21 +109,27 @@ export default function About() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <a
-              href="https://github.com/njf2125"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-mono text-[var(--muted)] hover:text-[var(--text)] transition-colors"
-            >
+          {/* CTA */}
+          <Link
+            href="/#contact"
+            className="inline-flex justify-center items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-center transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}
+          >
+            Start a project →
+          </Link>
+
+          {/* Social links */}
+          <div className="flex flex-col gap-2.5 pt-1">
+            <a href="mailto:hello@nickfig.dev"
+              className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
+              hello@nickfig.dev ↗
+            </a>
+            <a href="https://github.com/njf2125" target="_blank" rel="noopener noreferrer"
+              className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
               GitHub ↗
             </a>
-            <a
-              href="https://linkedin.com/in/nickfigliolia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-mono text-[var(--muted)] hover:text-[var(--text)] transition-colors"
-            >
+            <a href="https://linkedin.com/in/nickfigliolia" target="_blank" rel="noopener noreferrer"
+              className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
               LinkedIn ↗
             </a>
           </div>

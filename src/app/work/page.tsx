@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import WorkTable from "@/components/WorkTable";
+import WorkCard from "@/components/WorkCard";
 import { getAllCaseStudies } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "Work — nickfig.dev",
   description:
-    "Personal projects by Nick Figliolia: a recipe-saving app with AI grocery list parsing, a collaborative reading tracker PWA, and more.",
+    "Custom dashboards, client portals, and internal tools — built for specific teams and shipped to production.",
   openGraph: {
     title: "Work — nickfig.dev",
     description:
-      "Personal projects by Nick Figliolia: a recipe-saving app with AI grocery list parsing, a collaborative reading tracker PWA, and more.",
+      "Custom dashboards, client portals, and internal tools — built for specific teams and shipped to production.",
   },
 };
 
@@ -19,13 +19,21 @@ export default function WorkIndex() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
       <p className="font-mono text-[11px] uppercase tracking-widest mb-4 text-[var(--accent)]">
-        Portfolio
+        Work
       </p>
-      <h1 className="font-display text-4xl sm:text-5xl font-normal tracking-tight text-[var(--text)] mb-6">Work</h1>
-      <p className="text-lg text-[var(--muted)] leading-relaxed max-w-[480px] mb-12">
-        Personal projects built outside of work.
+      <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-[var(--text)] mb-4">
+        Selected work
+      </h1>
+      <p className="text-lg text-[var(--muted)] leading-relaxed max-w-[520px] mb-14">
+        Custom dashboards, portals, and apps — each built for a specific team&apos;s
+        real workflow, and shipped to production.
       </p>
-      <WorkTable projects={caseStudies} />
+
+      <div className="flex flex-col gap-6">
+        {caseStudies.map((project) => (
+          <WorkCard key={project.slug} project={project} />
+        ))}
+      </div>
     </main>
   );
 }
