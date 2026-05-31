@@ -281,9 +281,9 @@ export default function Home() {
               Let&apos;s figure out if it&apos;s a good fit. I take on 1–2 clients at a time.
             </p>
             <div className="mt-8 flex flex-col gap-3">
-              <a href="mailto:hello@nickfig.dev"
+              <a href="mailto:dev@nickfig.dev"
                 className="font-mono text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
-                hello@nickfig.dev ↗
+                dev@nickfig.dev ↗
               </a>
               <a href="https://github.com/njf2125" target="_blank" rel="noopener noreferrer"
                 className="font-mono text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">

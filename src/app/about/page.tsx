@@ -125,9 +125,9 @@ export default function About() {
 
           {/* Social links */}
           <div className="flex flex-col gap-2.5 pt-1">
-            <a href="mailto:hello@nickfig.dev"
+            <a href="mailto:dev@nickfig.dev"
               className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
-              hello@nickfig.dev ↗
+              dev@nickfig.dev ↗
             </a>
             <a href="https://github.com/njf2125" target="_blank" rel="noopener noreferrer"
               className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
