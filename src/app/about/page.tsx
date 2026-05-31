@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About — nickfig.dev",
   description:
-    "QA engineer turned software engineer. I take on freelance work for teams that need custom dashboards, internal tools, and full-stack web apps built with React and TypeScript.",
+    "I build custom dashboards, client portals, and internal tools for small teams that have outgrown off-the-shelf software.",
   openGraph: {
     title: "About — nickfig.dev",
     description:
-      "QA engineer turned software engineer. I take on freelance work for teams that need custom dashboards, internal tools, and full-stack web apps built with React and TypeScript.",
+      "I build custom dashboards, client portals, and internal tools for small teams that have outgrown off-the-shelf software.",
   },
 };
 
@@ -25,8 +25,8 @@ export default function About() {
           </p>
 
           <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
-            QA engineer turned software engineer — which means I think carefully about
-            correctness and edge cases, not just the happy path.
+            I started in quality assurance, which means I think about what breaks before
+            it does — not just whether something works when everything goes right.
           </p>
           <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
             On the side I take on freelance work for teams that need{" "}
@@ -36,8 +36,9 @@ export default function About() {
             {" "}— things that have outgrown off-the-shelf software.
           </p>
           <p className="text-sm text-[var(--muted)] leading-relaxed mb-6">
-            Personal projects: a collaborative reading tracker PWA, a recipe-saving app with
-            AI grocery list parsing, and various home automation experiments.
+            Personal projects: SamePage (collaborative reading tracker, live on iOS and Android),
+            Client Room (client portal for freelancers with Stripe-powered invoicing), and CDR Dashboard
+            (real-time job tracker built for a repair workshop).
           </p>
 
           <p className="text-[10px] font-mono text-[var(--muted)] uppercase tracking-widest mb-2">
@@ -67,21 +68,23 @@ export default function About() {
               Open to projects
             </div>
             <p className="text-xs text-[var(--muted)] mt-2 leading-relaxed">
-              1–2 clients at a time.
-              <br />
-              Projects from $2,500.
+              1–2 clients at a time. Reach out and let&apos;s see if it&apos;s a good fit.
             </p>
           </div>
 
           <div className="flex flex-col gap-2">
             <a
               href="https://github.com/njf2125"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xs font-mono text-[var(--muted)] hover:text-[var(--text)] transition-colors"
             >
               GitHub ↗
             </a>
             <a
               href="https://linkedin.com/in/nickfigliolia"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-xs font-mono text-[var(--muted)] hover:text-[var(--text)] transition-colors"
             >
               LinkedIn ↗

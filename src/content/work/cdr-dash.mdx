@@ -1,0 +1,49 @@
+---
+title: CDR Dashboard
+subtitle: Real-time job tracker for a paintless dent repair workshop
+stack: [React 19, TypeScript, Vite, Firestore, Cloudflare Pages Functions]
+problem: A busy PDR workshop was tracking jobs on paper and whiteboards. Techs couldn't see what was queued, management had no live status view, and nothing showed when a car was actually ready for pickup.
+whatWasBuilt: A full-stack job tracking dashboard with a Kanban board for technicians, a read-only TV display mode for the shop floor, and role-based access for admins, techs, and display screens. Timestamps auto-populate on every status transition so the lifecycle is always accurate.
+outcome: Deployed and used daily by the workshop staff. Jobs move from intake to pickup without a single phone call or whiteboard update.
+featured: false
+stats:
+  - label: "Status"
+    value: "Live · daily use"
+    highlight: true
+  - label: "Access"
+    value: "Role-based · PIN auth"
+  - label: "Display"
+    value: "TV + workstation"
+---
+
+## Background
+
+Coastal Dent Repair does paintless dent removal and minor collision work. Like most small repair shops, their workflow lived on paper: a job sheet at intake, a whiteboard in the bay, a phone call when the car was ready. It worked until it didn't — dropped handoffs, techs pulling the wrong car, customers showing up before the job was done.
+
+## The Problem
+
+The shop needed visibility without complexity. Three different audiences — technicians at their workstations, management on a laptop, and a TV mounted in the waiting area — all needed a live view of the job queue. But adding logins, passwords, and account management would never get adopted by a small team that just wants to get cars done.
+
+## What I Built
+
+A full-stack dashboard running on Cloudflare Pages with serverless edge functions:
+
+- **Kanban board** — four columns (To Do, In Progress, Awaiting Pickup, Completed) with drag-and-drop. Each card shows customer name, vehicle details, job type, and assigned tech.
+- **Three access roles** — ADMIN (full control), USER (create and update jobs), READ_ONLY (view only). No OAuth, no email — PIN-based login fits how the team actually works.
+- **TV display mode** — navigating to `/?mode=tv` auto-authenticates as a read-only display account and enters fullscreen. Built specifically for the shop's mounted Fire TV.
+- **Lifecycle automation** — status transitions automatically set `startedAt`, `completedAt`, and `pickedUpAt` timestamps. There's no way to skip or fudge them.
+- **Account lockout** — 5 failed PIN attempts locks the account for 15 minutes, tracked in Firestore.
+- **Archive tab** — completed jobs remain queryable for throughput tracking and reference.
+
+## Key Technical Decision
+
+<Callout>
+**PIN auth + stateless HMAC tokens instead of OAuth.**
+OAuth is the right choice for consumer apps. For a five-person shop team, it's overhead nobody wants — new Google accounts, forgot-my-password flows, email verification. Instead, the server issues a stateless token (`userId.timestamp.HMAC-SHA256-signature`) on PIN login. Every mutation verifies the signature server-side without a database lookup. Simpler infrastructure, zero dependency on external identity providers, and the team was up and running in minutes.
+</Callout>
+
+## Stack
+
+React 19 + TypeScript + Vite · Firestore · Cloudflare Pages Functions · Tailwind CSS v4
+
+<a href="https://cdr.fignacious.com" target="_blank" rel="noopener noreferrer">View live dashboard →</a>

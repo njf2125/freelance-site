@@ -10,12 +10,12 @@ The site targets potential clients who have outgrown off-the-shelf tools and nee
 
 | Layer | Choice |
 |---|---|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript (strict mode) |
 | Styling | Tailwind CSS v4 (`@tailwindcss/postcss`) |
 | Content | MDX via `next-mdx-remote/rsc` + `gray-matter` |
 | Deployment | Cloudflare Pages |
-| Contact form | Web3Forms (access key embedded in ContactForm.tsx, no backend needed) |
+| Contact form | Web3Forms (key in `NEXT_PUBLIC_WEB3FORMS_KEY` env var, no backend needed) |
 | Analytics | Cloudflare Web Analytics (beacon script in layout) |
 
 **Tailwind v4 note:** There is no `tailwind.config.js`. Theme config lives in `globals.css` via `@theme`. Do not create a config file.

@@ -2,8 +2,9 @@ import Link from "next/link";
 import { CaseStudy } from "@/lib/types";
 
 const projectMeta: Record<string, { year: string; type: string }> = {
-  samepage: { year: "2025", type: "PWA · realtime" },
-  "recipe-bookmarks": { year: "2025", type: "Full-stack · AI" },
+  clientroom: { year: "2025", type: "Product · SaaS" },
+  "cdr-dash": { year: "2025", type: "Client work · Dashboard" },
+samepage: { year: "2025", type: "iOS · Android · Web" },
 };
 
 export default function WorkTable({ projects }: { projects: CaseStudy[] }) {

@@ -1,7 +1,7 @@
 ---
 title: SamePage
-subtitle: Collaborative reading tracker PWA
-stack: [React 19, TypeScript, Vite, Firebase Auth, Firestore, Cloudflare Pages]
+subtitle: Collaborative reading tracker for iOS, Android, and web
+stack: [React 19, TypeScript, Vite, Capacitor, Firebase Auth, Firestore, Cloudflare Pages]
 problem: Two people reading the same book needed a shared space to log progress, leave notes, and stay in sync — without spreadsheets or constant texting. No existing app supported the lightweight collaborative workflow they needed.
 whatWasBuilt: A single-page React app with real-time multiplayer sync. Users can join a reading group, log their progress, and leave comments. The app includes a "spoiler lock" feature that blurs comments ahead of a reader's current progress, and uses the Open Library API for book discovery.
 outcome: A fully functional multi-user PWA used daily. Demonstrates end-to-end app architecture including auth, real-time data sync, multiplayer features, and mobile UX.
@@ -28,6 +28,7 @@ Existing reading apps are built for solo readers. There was no lightweight, shar
 
 A full-stack single-page application built with React 19, TypeScript, and Vite, featuring:
 
+- **Cross-platform:** Built with Capacitor to ship native iOS and Android apps from the same React codebase. Android's WebView has unreliable Firestore write channels, so the app falls back to the Firestore REST API for those writes — same data model, platform-appropriate transport.
 - **Real-time Multiplayer:** Firestore `onSnapshot` listeners power live sync for both reading progress (debounced to avoid excessive writes) and comment threads. Fellow travelers are updated instantly.
 - **Spoiler Lock:** A custom feature that calculates a reader's current progress and automatically blurs comments left at a location more than 2 units ahead of them.
 - **Invite-only Auth System:** Firebase Auth handles the actual authentication, but sign-ups are gated behind an invite system. Designated admins can generate expiring invite links (`?invite=<token>`).
@@ -42,4 +43,6 @@ Instead of implementing a heavy client-side state management library like Redux,
 
 ## Stack
 
-React 19 + TypeScript + Vite · Firebase Auth · Firestore · Cloudflare Pages · Tailwind CSS
+React 19 + TypeScript + Vite · Capacitor · Firebase Auth · Firestore · Cloudflare Pages · Tailwind CSS
+
+<a href="https://apps.apple.com/us/app/samepage-read-together/id6770348751" target="_blank" rel="noopener noreferrer">Download on the App Store →</a>

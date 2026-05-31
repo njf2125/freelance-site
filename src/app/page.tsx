@@ -13,24 +13,24 @@ const projects = [
     demo: "https://clientroom.app",
   },
   {
-    slug: "recipe-bookmarks",
-    title: "Recipe Bookmarks",
-    description: "A recipe organizer that finds meals from what's already in your kitchen using AI-powered shopping list scanning.",
-    tech: ["React", "TypeScript", "Cloudflare D1", "Gemini Vision"],
-    type: "Full-stack · AI",
+    slug: "cdr-dash",
+    title: "CDR Dashboard",
+    description: "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
+    tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
+    type: "Client work · Dashboard",
     year: "2025",
-    github: "https://github.com/njf2125/recipe-bookmarks",
-    demo: "https://recipes.nickfig.dev", // Corrected demo URL based on common patterns
+    demo: "https://cdr.fignacious.com",
   },
-  {
+{
     slug: "samepage",
     title: "SamePage",
     description: "A collaborative reading tracker built for two people to stay on the same page with real-time sync and spoiler protection.",
     tech: ["React", "TypeScript", "Firebase Auth", "Firestore"],
-    type: "PWA · Real-time",
+    type: "iOS · Android · Web",
     year: "2025",
     github: "https://github.com/njf2125/SamePage",
-    demo: "https://samepage.app",
+    demo: "https://samepage.pages.dev",
+    appStore: "https://apps.apple.com/us/app/samepage-read-together/id6770348751",
   },
 ];
 
@@ -62,10 +62,10 @@ export default function Home() {
       <section className="py-14 sm:py-20 border-b border-[var(--border)]">
         <h1 className="font-display text-5xl sm:text-6xl leading-[1.1] tracking-tight max-w-3xl">
           <span className="block font-normal text-[var(--muted)]">
-            That project living rent-free in your head?
+            Got a workflow held together with spreadsheets and workarounds?
           </span>
           <span className="block font-semibold text-[var(--text)]">
-            I&apos;m already thinking about the architecture.
+            I build the software that actually fits.
           </span>
         </h1>
 
@@ -78,12 +78,17 @@ export default function Home() {
         </p>
 
         <p className="mt-6 text-sm text-[var(--faint)] max-w-lg leading-relaxed">
-          Specializing in React and TypeScript — working with small teams to build tools that actually fit their workflow.
+          Working with small teams to build custom dashboards, client portals, and internal tools — the things off-the-shelf software can&apos;t quite cover.
         </p>
+
+        <div className="mt-10 flex items-center gap-3">
+          <span className="inline-block w-2 h-2 rounded-full bg-[var(--accent)]" />
+          <span className="font-mono text-xs text-[var(--muted)]">Available for new projects</span>
+        </div>
 
         <a
           href="#contact"
-          className="mt-10 inline-flex items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--text)] transition-colors"
+          className="mt-4 inline-flex items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--text)] transition-colors"
         >
           Let&apos;s talk about it →
         </a>
@@ -103,9 +108,16 @@ export default function Home() {
                   <h3 className="text-lg font-medium text-[var(--text)]">{project.title}</h3>
                 </Link>
                 <div className="flex items-center gap-4">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
-                    GitHub
-                  </a>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
+                      GitHub
+                    </a>
+                  )}
+                  {project.appStore && (
+                    <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
+                      App Store
+                    </a>
+                  )}
                   <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
                     Live Demo
                   </a>
