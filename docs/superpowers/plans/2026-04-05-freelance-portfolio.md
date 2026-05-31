@@ -1017,10 +1017,8 @@ export default function About() {
 
       <div className="mt-10 max-w-2xl space-y-6 text-zinc-300">
         <p>
-          I&apos;m a senior frontend engineer at{" "}
-          <span className="text-zinc-100 font-medium">a software company</span>, where I
-          build React and TypeScript applications for the financial services
-          industry. Day-to-day I work across complex data-heavy UIs, design
+          I&apos;m a senior frontend engineer, where I
+          build React and TypeScript applications. Day-to-day I work across complex data-heavy UIs, design
           systems, and the kind of internal tooling that quietly makes
           organizations run.
         </p>
