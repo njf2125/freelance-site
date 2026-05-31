@@ -52,9 +52,6 @@ export const metadata: Metadata = {
       "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
     images: ["/opengraph-image.png"],
   },
-  verification: {
-    google: "YOUR_GOOGLE_VERIFICATION_CODE",
-  },
 };
 
 export default function RootLayout({
