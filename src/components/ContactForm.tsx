@@ -15,7 +15,7 @@ export default function ContactForm() {
 
     const form = e.currentTarget;
     const data = {
-      access_key: "REDACTED",
+      access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
       subject: "New inquiry — nickfig.dev",
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
