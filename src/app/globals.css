@@ -7,6 +7,11 @@
   --font-mono: var(--font-dm-mono), monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Offset for the sticky header navigation bar */
+}
+
 :root {
   --bg: #09090b; /* zinc-950 */
   --glow: radial-gradient(ellipse 80% 40% at 0% 0%, rgba(45, 212, 191, 0.06) 0%, transparent 100%);
@@ -42,4 +47,12 @@ body::after {
   70%, 100% { transform: scale(2.6); opacity: 0; }
 }
 .animate-ping { animation: ping 2.4s cubic-bezier(0,0,0.2,1) infinite; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
 

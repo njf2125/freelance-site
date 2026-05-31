@@ -26,7 +26,7 @@ export default function WorkCard({ project }: WorkCardProps) {
 
   return (
     <article
-      className="group grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-2xl border transition-colors hover:border-[var(--accent)]"
+      className="group grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-2xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(45,212,191,0.15)]"
       style={{ backgroundColor: "var(--surface)", borderColor: "var(--border)" }}
     >
       {/* Screenshot */}
