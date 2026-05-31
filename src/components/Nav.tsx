@@ -5,7 +5,8 @@ export default function Nav() {
     <header
       className="sticky top-0 z-50 border-b"
       style={{
-        backgroundColor: "var(--bg)",
+        backgroundColor: "color-mix(in oklab, var(--bg) 82%, transparent)",
+        backdropFilter: "blur(10px)",
         borderColor: "var(--border)",
       }}
     >
@@ -17,11 +18,12 @@ export default function Nav() {
         >
           nickfig.dev
         </Link>
+
         <ul className="flex items-center gap-6">
           <li>
             <Link
               href="/work"
-              className="text-sm"
+              className="text-sm transition-colors hover:text-[var(--text)]"
               style={{ color: "var(--muted)" }}
             >
               Work
@@ -30,7 +32,7 @@ export default function Nav() {
           <li>
             <Link
               href="/about"
-              className="text-sm"
+              className="text-sm transition-colors hover:text-[var(--text)]"
               style={{ color: "var(--muted)" }}
             >
               About
@@ -39,10 +41,10 @@ export default function Nav() {
           <li>
             <Link
               href="/#contact"
-              className="text-sm"
-              style={{ color: "var(--muted)" }}
+              className="text-sm rounded-lg border px-3.5 py-2 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              style={{ borderColor: "var(--border-2)", color: "var(--text)" }}
             >
-              Contact
+              Start a project
             </Link>
           </li>
         </ul>
