@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CaseStudy } from "@/lib/types";
 
 // Static map of slug → public screenshot path.
@@ -31,14 +32,15 @@ export default function WorkCard({ project }: WorkCardProps) {
       {/* Screenshot */}
       {img && (
         <div
-          className="overflow-hidden border-b sm:border-b-0 sm:border-r"
-          style={{ borderColor: "var(--border)", minHeight: "260px" }}
+          className="relative overflow-hidden border-b sm:border-b-0 sm:border-r w-full h-full min-h-[260px]"
+          style={{ borderColor: "var(--border)" }}
         >
-          <img
+          <Image
             src={img}
             alt={project.title}
-            className="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.02]"
-            style={{ minHeight: "260px" }}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            sizes="(max-w-md) 100vw, 400px"
           />
         </div>
       )}

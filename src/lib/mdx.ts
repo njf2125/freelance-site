@@ -7,11 +7,12 @@ const CONTENT_DIR = path.join(process.cwd(), "src/content/work");
 
 export function getAllCaseStudies(): CaseStudy[] {
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
-  return files.map((file) => {
+  const studies = files.map((file) => {
     const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
     const { data } = matter(raw);
     return { slug: file.replace(".mdx", ""), ...data } as CaseStudy;
   });
+  return studies.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 }
 
 export function getCaseStudy(slug: string): {

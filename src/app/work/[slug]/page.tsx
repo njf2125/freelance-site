@@ -49,8 +49,15 @@ export default async function CaseStudyPage({
     notFound();
   }
 
+  const studies = getAllCaseStudies();
+  const currentIndex = studies.findIndex((s) => s.slug === slug);
+  const nextStudy = studies[(currentIndex + 1) % studies.length];
+
   return (
-    <CaseStudyLayout {...frontmatter!}>
+    <CaseStudyLayout
+      {...frontmatter!}
+      nextStudy={{ slug: nextStudy.slug, title: nextStudy.title }}
+    >
       <MDXRemote source={content!} components={components} />
     </CaseStudyLayout>
   );
