@@ -14,6 +14,14 @@ export default function ContactForm() {
     setErrorMsg("");
 
     const form = e.currentTarget;
+    
+    // Honeypot spam check
+    const isBot = (form.elements.namedItem("botcheck") as HTMLInputElement).checked;
+    if (isBot) {
+      setStatus("success");
+      return;
+    }
+
     const data = {
       access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
       subject: "New inquiry — nickfig.dev",
@@ -52,6 +60,13 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      {/* Honeypot spam protection */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        className="hidden"
+        style={{ display: "none" }}
+      />
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="font-mono text-[10px] uppercase tracking-widest text-[var(--faint)]">
