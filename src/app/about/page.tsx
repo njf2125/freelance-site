@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About — nickfig.dev",
@@ -88,12 +89,16 @@ export default function About() {
         <div className="flex flex-col gap-4">
 
           {/* Portrait — replace src with your actual photo path */}
-          <img
-            src="/portrait.jpg"
-            alt="Nick Figliolia"
-            className="w-full rounded-xl object-cover"
-            style={{ height: "280px" }}
-          />
+          <div className="relative w-full rounded-xl overflow-hidden" style={{ height: "280px" }}>
+            <Image
+              src="/portrait.jpg"
+              alt="Nick Figliolia"
+              fill
+              className="object-cover"
+              sizes="(max-w-md) 100vw, 280px"
+              priority
+            />
+          </div>
 
           {/* Availability card */}
           <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4">
@@ -120,9 +125,9 @@ export default function About() {
 
           {/* Social links */}
           <div className="flex flex-col gap-2.5 pt-1">
-            <a href="mailto:hello@nickfig.dev"
+            <a href="mailto:dev@nickfig.dev"
               className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
-              hello@nickfig.dev ↗
+              dev@nickfig.dev ↗
             </a>
             <a href="https://github.com/njf2125" target="_blank" rel="noopener noreferrer"
               className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors">

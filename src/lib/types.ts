@@ -15,6 +15,7 @@ export interface CaseStudy {
   featured: boolean;
   stats?: StatCard[];
   image?: string;
+  order?: number;
 }
 
 export interface NavLink {

@@ -1,8 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 
 // Add the `img` field to each project matching the screenshot in /public/work/
 const projects = [
+  {
+    slug: "cdr-dash",
+    title: "CDR Dashboard",
+    description:
+      "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
+    tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
+    type: "Client work · Dashboard",
+    year: "2025",
+    img: "/work/cdr.png",
+    demo: "https://cdr.fignacious.com",
+    caseStudy: "/work/cdr-dash",
+  },
   {
     slug: "clientroom",
     title: "Client Room",
@@ -15,18 +28,6 @@ const projects = [
     github: "https://github.com/njf2125/ClientRoom",
     demo: "https://clientroom.app",
     caseStudy: "/work/clientroom",
-  },
-  {
-    slug: "cdr-dash",
-    title: "CDR Dashboard",
-    description:
-      "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
-    tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
-    type: "Client work · Dashboard",
-    year: "2025",
-    img: "/work/cdr.png",
-    demo: "https://cdr.fignacious.com",
-    caseStudy: "/work/cdr-dash",
   },
   {
     slug: "samepage",
@@ -142,12 +143,16 @@ export default function Home() {
               </span>
             </div>
             {/* Replace src with whichever screenshot looks best at this size */}
-            <img
-              src="/work/cdr.png"
-              alt="CDR Dashboard — real-time Kanban board"
-              className="w-full block object-cover"
-              style={{ height: "320px" }}
-            />
+            <div className="relative w-full" style={{ height: "320px" }}>
+              <Image
+                src="/work/cdr.png"
+                alt="CDR Dashboard — real-time Kanban board"
+                fill
+                className="object-cover"
+                sizes="(max-w-md) 100vw, 400px"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -170,14 +175,15 @@ export default function Home() {
             >
               {/* Screenshot */}
               <div
-                className="overflow-hidden border-b sm:border-b-0 sm:border-r"
-                style={{ borderColor: "var(--border)", minHeight: "220px" }}
+                className="relative overflow-hidden border-b sm:border-b-0 sm:border-r w-full h-full min-h-[220px]"
+                style={{ borderColor: "var(--border)" }}
               >
-                <img
+                <Image
                   src={project.img}
                   alt={project.title}
-                  className="w-full h-full object-cover block transition-transform duration-300 group-hover:scale-[1.02]"
-                  style={{ minHeight: "220px" }}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  sizes="(max-w-md) 100vw, 400px"
                 />
               </div>
 
@@ -275,9 +281,9 @@ export default function Home() {
               Let&apos;s figure out if it&apos;s a good fit. I take on 1–2 clients at a time.
             </p>
             <div className="mt-8 flex flex-col gap-3">
-              <a href="mailto:hello@nickfig.dev"
+              <a href="mailto:dev@nickfig.dev"
                 className="font-mono text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
-                hello@nickfig.dev ↗
+                dev@nickfig.dev ↗
               </a>
               <a href="https://github.com/njf2125" target="_blank" rel="noopener noreferrer"
                 className="font-mono text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors">

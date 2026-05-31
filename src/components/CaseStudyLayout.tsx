@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { StatCard } from "@/lib/types";
 
 interface CaseStudyLayoutProps {
@@ -11,6 +12,7 @@ interface CaseStudyLayoutProps {
   outcome: string;
   stats?: StatCard[];
   image?: string;   // add `image` to CaseStudy type + MDX frontmatter — see README
+  nextStudy?: { slug: string; title: string };
   children: ReactNode;
 }
 
@@ -23,6 +25,7 @@ export default function CaseStudyLayout({
   outcome,
   stats,
   image,
+  nextStudy,
   children,
 }: CaseStudyLayoutProps) {
   return (
@@ -92,12 +95,16 @@ export default function CaseStudyLayout({
               <span key={i} className="w-2.5 h-2.5 rounded-full bg-[var(--border-2)]" />
             ))}
           </div>
-          <img
-            src={image}
-            alt={title}
-            className="w-full block object-cover"
-            style={{ maxHeight: "520px" }}
-          />
+          <div className="relative w-full" style={{ height: "450px" }}>
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+              sizes="(max-w-4xl) 100vw, 800px"
+              priority
+            />
+          </div>
         </div>
       )}
 
@@ -125,6 +132,24 @@ export default function CaseStudyLayout({
       <div className="mt-16 prose max-w-none prose-p:text-[var(--muted)] prose-p:leading-loose prose-headings:font-display prose-headings:font-normal prose-headings:text-[var(--text)] prose-a:text-[var(--accent)] prose-strong:text-[var(--text)] prose-strong:font-medium prose-li:text-[var(--muted)] prose-ul:text-[var(--muted)]">
         {children}
       </div>
+
+      {/* Next Case Study Navigation */}
+      {nextStudy && (
+        <div
+          className="mt-20 pt-8 border-t flex justify-between items-center"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <span className="text-xs font-mono text-[var(--faint)] uppercase tracking-widest">
+            Next Project
+          </span>
+          <Link
+            href={`/work/${nextStudy.slug}`}
+            className="font-display text-xl font-medium text-[var(--accent)] hover:text-[var(--text)] transition-colors"
+          >
+            {nextStudy.title} →
+          </Link>
+        </div>
+      )}
 
       {/* CTA */}
       <div
