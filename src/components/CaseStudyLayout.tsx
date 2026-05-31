@@ -165,7 +165,7 @@ export default function CaseStudyLayout({
         <div className="flex items-center gap-4 flex-wrap">
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
             style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}
           >
             Start a project →

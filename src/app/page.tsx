@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
+import { siteConfig } from "@/config/site";
 
 // Add the `img` field to each project matching the screenshot in /public/work/
 const projects = [
@@ -77,12 +78,26 @@ export default function Home() {
           {/* Copy */}
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="relative flex h-2 w-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--accent)] block" />
-              </span>
-              <span className="font-mono text-xs text-[var(--muted)]">
-                Available for new projects
-              </span>
+              {siteConfig.availability === "available" ? (
+                <>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
+                  </span>
+                  <span className="font-mono text-xs text-[var(--muted)]">
+                    Available for new projects
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="relative flex h-2 w-2">
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-500"></span>
+                  </span>
+                  <span className="font-mono text-xs text-[var(--muted)]">
+                    Booked up for now
+                  </span>
+                </>
+              )}
             </div>
 
             <h1 className="font-display mt-6 text-5xl sm:text-[3.4rem] leading-[1.08] tracking-tight">
@@ -107,7 +122,7 @@ export default function Home() {
             <div className="mt-8 flex items-center gap-4 flex-wrap">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
                 style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}
               >
                 Start a project →
@@ -167,7 +182,7 @@ export default function Home() {
           {projects.map((project) => (
             <div
               key={project.slug}
-              className="group grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-xl border transition-colors hover:border-[var(--accent)]"
+              className="group grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(45,212,191,0.15)]"
               style={{
                 backgroundColor: "var(--surface)",
                 borderColor: "var(--border)",
@@ -277,8 +292,8 @@ export default function Home() {
             <h2 className="font-display text-3xl font-normal tracking-tight text-[var(--text)]">
               Got something in mind?
             </h2>
-            <p className="mt-2 text-base text-[var(--muted)]">
-              Let&apos;s figure out if it&apos;s a good fit. I take on 1–2 clients at a time.
+            <p className="mt-2 text-base text-[var(--muted)] leading-relaxed">
+              Let&apos;s figure out if it&apos;s a good fit. I take on {siteConfig.maxClients} clients at a time. Projects start from {siteConfig.rate}.
             </p>
             <div className="mt-8 flex flex-col gap-3">
               <a href="mailto:dev@nickfig.dev"

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { siteConfig } from "@/config/site";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -71,6 +73,13 @@ export default function RootLayout({
         <Nav />
         <div className="flex-1">{children}</div>
         <Footer />
+        {siteConfig.analyticsToken && (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${siteConfig.analyticsToken}"}`}
+            defer
+          />
+        )}
       </body>
     </html>
   );

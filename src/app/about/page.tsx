@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "About — nickfig.dev",
@@ -105,19 +106,36 @@ export default function About() {
             <p className="text-[10px] font-mono text-[var(--faint)] uppercase tracking-widest mb-3">
               Availability
             </p>
-            <div className="flex items-center gap-2 text-sm font-semibold text-[var(--accent)]">
-              <span className="w-2 h-2 rounded-full bg-[var(--accent)] shrink-0" />
-              Open to projects
-            </div>
-            <p className="text-xs text-[var(--muted)] mt-2 leading-relaxed">
-              1–2 clients at a time. Reach out and let&apos;s see if it&apos;s a good fit.
-            </p>
+            {siteConfig.availability === "available" ? (
+              <>
+                <div className="flex items-center gap-2 text-sm font-semibold text-[var(--accent)]">
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
+                  </span>
+                  Open to projects
+                </div>
+                <p className="text-xs text-[var(--muted)] mt-2 leading-relaxed">
+                  {siteConfig.maxClients} clients at a time. Projects from {siteConfig.rate}.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="flex items-center gap-2 text-sm font-semibold text-zinc-400">
+                  <span className="w-2 h-2 rounded-full bg-zinc-500 shrink-0" />
+                  Fully Booked
+                </div>
+                <p className="text-xs text-[var(--muted)] mt-2 leading-relaxed">
+                  I&apos;m currently at capacity. Reach out to secure a future slot.
+                </p>
+              </>
+            )}
           </div>
 
           {/* CTA */}
           <Link
             href="/#contact"
-            className="inline-flex justify-center items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-center transition-opacity hover:opacity-90"
+            className="inline-flex justify-center items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-center transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
             style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}
           >
             Start a project →

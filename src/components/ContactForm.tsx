@@ -52,7 +52,7 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <p className="text-sm" style={{ color: "var(--accent)" }}>
+      <p className="text-sm animate-fade-in" style={{ color: "var(--accent)" }}>
         Message sent. I&apos;ll be in touch within a day or two.
       </p>
     );
@@ -124,12 +124,12 @@ export default function ContactForm() {
         />
       </div>
       {status === "error" && (
-        <p className="text-sm" style={{ color: "var(--text)" }}>{errorMsg}</p>
+        <p className="text-sm animate-fade-in" style={{ color: "var(--text)" }}>{errorMsg}</p>
       )}
       <button
         type="submit"
         disabled={status === "loading"}
-        className="self-start rounded-md px-6 py-3 text-sm font-medium transition-opacity disabled:opacity-50"
+        className="self-start rounded-md px-6 py-3 text-sm font-medium transition-all duration-150 active:scale-[0.98] disabled:scale-100 disabled:opacity-50"
         style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}
       >
         {status === "loading" ? "Sending..." : "Send message"}
