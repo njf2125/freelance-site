@@ -6,18 +6,6 @@ import { siteConfig } from "@/config/site";
 // Add the `img` field to each project matching the screenshot in /public/work/
 const projects = [
   {
-    slug: "cdr-dash",
-    title: "CDR Dashboard",
-    description:
-      "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
-    tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
-    type: "Client work · Dashboard",
-    year: "2025",
-    img: "/work/cdr.png",
-    demo: "https://cdr.fignacious.com",
-    caseStudy: "/work/cdr-dash",
-  },
-  {
     slug: "clientroom",
     title: "Client Room",
     description:
@@ -29,6 +17,18 @@ const projects = [
     github: "https://github.com/njf2125/ClientRoom",
     demo: "https://clientroom.app",
     caseStudy: "/work/clientroom",
+  },
+  {
+    slug: "cdr-dash",
+    title: "CDR Dashboard",
+    description:
+      "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
+    tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
+    type: "Client work · Dashboard",
+    year: "2025",
+    img: "/work/cdr.png",
+    demo: "https://cdr.fignacious.com",
+    caseStudy: "/work/cdr-dash",
   },
   {
     slug: "samepage",
