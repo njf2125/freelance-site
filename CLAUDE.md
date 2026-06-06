@@ -27,13 +27,17 @@ The site targets potential clients who have outgrown off-the-shelf tools and nee
 ### CSS Variables (defined in `src/app/globals.css`)
 
 ```css
---bg:      #09090b  /* zinc-950 — page background */
---surface: #18181b  /* zinc-900 — card backgrounds */
---border:  #27272a  /* zinc-800 — borders */
---text:    #fafafa  /* zinc-50  — primary text */
---muted:   #a1a1aa  /* zinc-400 — secondary text */
---faint:   #52525b  /* zinc-600 — de-emphasized text, tags */
---accent:  #2dd4bf  /* teal-400 — links, hover states, badges */
+--bg:         #09090b  /* zinc-950 — page background */
+--glow:       radial-gradient(...)  /* teal ambient glow fixed to top-left corner */
+--surface:    #18181b  /* zinc-900 — card backgrounds */
+--surface-2:  #1d1d20  /* nested surface — stat backgrounds inside cards */
+--border:     #27272a  /* zinc-800 — borders */
+--border-2:   #34343a  /* stronger border — window frames, nav CTA */
+--text:       #fafafa  /* zinc-50  — primary text */
+--muted:      #a1a1aa  /* zinc-400 — secondary text */
+--faint:      #71717a  /* zinc-500 — de-emphasized text, tags */
+--accent:     #2dd4bf  /* teal-400 — links, hover states, badges */
+--accent-ink: #06201c  /* dark ink — text on accent-coloured backgrounds */
 ```
 
 **Always use these CSS variables.** Never use Tailwind's shadcn semantic classes (`text-foreground`, `bg-muted`, `border-border`, `text-muted-foreground`) — they are not defined and will produce invisible or broken styles.
@@ -67,6 +71,10 @@ src/
     layout.tsx              ← root layout: Nav, Footer, fonts, analytics
     page.tsx                ← home page
     about/page.tsx          ← about page
+    robots.ts               ← Next.js robots.txt generation
+    sitemap.ts              ← Next.js sitemap.xml generation (includes all case study slugs)
+    icon.png                ← favicon
+    opengraph-image.png     ← OG image for social sharing
     work/
       page.tsx              ← work index (lists all case studies via getAllCaseStudies())
       [slug]/page.tsx       ← dynamic case study page (MDXRemote + CaseStudyLayout)
@@ -76,11 +84,15 @@ src/
     Footer.tsx              ← copyright, "Built by me, obviously.", GitHub, LinkedIn
     CaseStudyLayout.tsx     ← case study wrapper: back-link, header, stats, 3-col callouts, MDX slot
     ContactForm.tsx         ← "use client" form, posts directly to https://api.web3forms.com/submit
-    WorkTable.tsx           ← used on /work index page
+    WorkCard.tsx            ← image + content card used on /work index page
+    WorkTable.tsx           ← (legacy) table view, still present
     callout.tsx             ← <Callout> MDX component for highlighted decisions
+  config/
+    site.ts                 ← SiteConfig: availability ("available"|"busy"), rate, maxClients, analyticsToken
   content/work/
+    clientroom.mdx          ← Client Room case study
+    cdr-dash.mdx            ← CDR Dashboard case study
     samepage.mdx            ← SamePage case study
-    recipe-bookmarks.mdx    ← Recipe Bookmarks case study
   lib/
     mdx.ts                  ← getAllCaseStudies() + getCaseStudy(slug) using gray-matter
     types.ts                ← CaseStudy, StatCard, NavLink interfaces
@@ -90,13 +102,23 @@ src/
 
 ## Home Page Structure (`src/app/page.tsx`)
 
-Sections in order, all left-aligned, `max-w-4xl`:
+Sections in order, all left-aligned, `max-w-4xl`. Projects are defined inline in `page.tsx` as a `projects` array (not pulled from MDX) — this array is the source of truth for home-page card content (title, description, tech, links, image path).
 
-1. **Hero** — Two-line headline with font-weight contrast (light/bold), stacked subhead, muted credibility line, inline teal CTA link to `#contact`
-2. **Selected Work** — Placeholder "Currently booking" dashed card (no real client projects yet)
-3. **Other Work** — SamePage and Recipe Bookmarks as cards with project name, one-line problem statement, stack tags, type/year metadata
-4. **How I Work** — Three steps (1 —, 2 —, 3 —): Discovery, Build, Launch
-5. **Contact** — Two-line heading ("Got something in mind?" / "Let's figure out if it's a good fit.") above `<ContactForm />`
+1. **Hero** — Two-column layout (`sm:grid-cols-2`). Left: availability pulsing dot + headline + subhead + CTA buttons ("Start a project →" fills teal, "See the work →" is text link). Right: browser-chrome screenshot frame showing the CDR dashboard (`/work/cdr.png`).
+2. **Work** — All three projects (Client Room, CDR Dashboard, SamePage) as horizontal image+content cards. Each card: screenshot on the left, title/type/year/description/tech tags/links on the right. Hover lifts with teal shadow.
+3. **How I Work** — Three steps with large accent numerals, border-top dividers: Discovery, Build, Launch.
+4. **Contact** — Two-column layout (`sm:grid-cols-[0.8fr_1.2fr]`). Left: heading, one-liner about capacity/rate from `siteConfig`, direct links (email, GitHub, LinkedIn). Right: `<ContactForm />`.
+
+### Site config (`src/config/site.ts`)
+
+Controls dynamic copy on the home page:
+
+```ts
+siteConfig.availability  // "available" | "busy" — toggles pulsing dot vs. static grey dot
+siteConfig.rate          // e.g. "$2,500" — shown in contact section
+siteConfig.maxClients    // e.g. "1–2" — shown in contact section
+siteConfig.analyticsToken // Cloudflare Web Analytics token
+```
 
 ---
 
@@ -130,7 +152,7 @@ The `<Callout>` component is available inside MDX for highlighting key technical
 - **Section numbers** use `1 —` format, not `01 —`
 - **External links** get `target="_blank" rel="noopener noreferrer"`
 - **No new components** for one-off patterns — inline is fine for a portfolio this size
-- **No animations** — hover `transition-colors` is the extent of it; no Framer Motion or keyframes
+- **Animations** — CSS keyframes only; no Framer Motion or animation libraries. Currently defined in `globals.css`: `ping` (pulsing availability dot) and `fadeIn` (subtle enter for transient UI). New animations must use CSS `@keyframes`, not JS libraries.
 
 ---
 
