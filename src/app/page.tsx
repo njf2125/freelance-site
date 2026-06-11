@@ -87,6 +87,8 @@ const jsonLd = {
         "React",
         "TypeScript",
         "Next.js",
+        "Firebase",
+        "Cloudflare",
         "Frontend Engineering",
         "Dashboards",
         "Internal Tools",
