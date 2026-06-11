@@ -21,7 +21,7 @@ const STACK = [
 
 export default function About() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
+    <main className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
 
       {/* Page header */}
       <div className="mb-12">
