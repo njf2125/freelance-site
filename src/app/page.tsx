@@ -24,7 +24,7 @@ const projects = [
     description:
       "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
     tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
-    type: "Client work · Dashboard",
+    type: "Dashboard",
     year: "2025",
     img: "/work/cdr.png",
     demo: "https://cdr.fignacious.com",
@@ -69,7 +69,7 @@ const processSteps = [
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-4xl px-6">
+    <main className="mx-auto max-w-5xl px-6">
 
       {/* Hero */}
       <section className="py-14 sm:py-20 border-b border-[var(--border)]">
@@ -110,13 +110,12 @@ export default function Home() {
             </h1>
 
             <p className="mt-8 text-lg text-[var(--muted)] leading-relaxed">
-              <span className="text-[var(--text)]">Either way, we ship.</span>{" "}
-              Some clients come with a detailed spec. Some come with a napkin sketch.
+              <span className="text-[var(--text)]">A QA background means I think about what breaks before I build it</span>{" "}
+              — not after your users find it.
             </p>
 
             <p className="mt-4 text-sm text-[var(--faint)] leading-relaxed max-w-sm">
-              Custom dashboards, client portals, and internal tools for small teams —
-              the things off-the-shelf software can&apos;t quite cover.
+              Custom dashboards, client portals, and internal tools for small teams.
             </p>
 
             <div className="mt-8 flex items-center gap-4 flex-wrap">
@@ -140,31 +139,17 @@ export default function Home() {
           <div
             className="rounded-2xl overflow-hidden border"
             style={{
-              backgroundColor: "var(--surface)",
               borderColor: "var(--border-2)",
               boxShadow: "0 32px 64px -24px rgba(0,0,0,0.8)",
             }}
           >
-            {/* Browser chrome */}
-            <div
-              className="flex items-center gap-1.5 px-3.5 py-3 border-b"
-              style={{ backgroundColor: "var(--surface-2)", borderColor: "var(--border)" }}
-            >
-              {["bg-[var(--border-2)]", "bg-[var(--border-2)]", "bg-[var(--border-2)]"].map((c, i) => (
-                <span key={i} className={`w-2.5 h-2.5 rounded-full ${c}`} />
-              ))}
-              <span className="ml-3 font-mono text-[11px] text-[var(--faint)]">
-                cdr.fignacious.com
-              </span>
-            </div>
-            {/* Replace src with whichever screenshot looks best at this size */}
-            <div className="relative w-full" style={{ height: "320px" }}>
+            <div className="relative w-full aspect-[16/10]">
               <Image
                 src="/work/cdr.png"
                 alt="CDR Dashboard — real-time Kanban board"
                 fill
                 className="object-cover"
-                sizes="(max-w-md) 100vw, 400px"
+                sizes="(max-width: 640px) 100vw, 460px"
                 priority
               />
             </div>
@@ -186,6 +171,9 @@ export default function Home() {
               style={{
                 backgroundColor: "var(--surface)",
                 borderColor: "var(--border)",
+                ...(project.slug === "cdr-dash" && {
+                  borderLeft: "3px solid var(--accent)",
+                }),
               }}
             >
               {/* Screenshot */}
@@ -204,6 +192,17 @@ export default function Home() {
 
               {/* Content */}
               <div className="p-6 flex flex-col">
+                {project.slug === "cdr-dash" && (
+                  <div
+                    className="flex items-center gap-1.5 mb-3 w-fit rounded-full border px-2 py-0.5"
+                    style={{ background: "rgba(45,212,191,0.08)", borderColor: "rgba(45,212,191,0.25)" }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                    <span className="text-[9px] font-mono uppercase tracking-wider text-[var(--accent)]">
+                      Client work · in production
+                    </span>
+                  </div>
+                )}
                 <div className="flex items-center justify-between mb-3">
                   <Link href={`/work/${project.slug}`} className="hover:underline">
                     <h3 className="font-display text-xl font-semibold text-[var(--text)]">

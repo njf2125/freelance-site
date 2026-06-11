@@ -102,9 +102,9 @@ src/
 
 ## Home Page Structure (`src/app/page.tsx`)
 
-Sections in order, all left-aligned, `max-w-4xl`. Projects are defined inline in `page.tsx` as a `projects` array (not pulled from MDX) — this array is the source of truth for home-page card content (title, description, tech, links, image path).
+Sections in order, all left-aligned, `max-w-5xl` (the container width used site-wide — Nav, Footer, home, about, work, and case study pages all share it). Projects are defined inline in `page.tsx` as a `projects` array (not pulled from MDX) — this array is the source of truth for home-page card content (title, description, tech, links, image path).
 
-1. **Hero** — Two-column layout (`sm:grid-cols-2`). Left: availability pulsing dot + headline + subhead + CTA buttons ("Start a project →" fills teal, "See the work →" is text link). Right: browser-chrome screenshot frame showing the CDR dashboard (`/work/cdr.png`).
+1. **Hero** — Two-column layout (`sm:grid-cols-2`). Left: availability pulsing dot + headline + subhead + CTA buttons ("Start a project →" fills teal, "See the work →" is text link). Right: a clean `aspect-[16/10]` bordered screenshot frame showing the CDR dashboard (`/work/cdr.png`), displayed uncropped with a soft shadow — no browser chrome.
 2. **Work** — All three projects (Client Room, CDR Dashboard, SamePage) as horizontal image+content cards. Each card: screenshot on the left, title/type/year/description/tech tags/links on the right. Hover lifts with teal shadow.
 3. **How I Work** — Three steps with large accent numerals, border-top dividers: Discovery, Build, Launch.
 4. **Contact** — Two-column layout (`sm:grid-cols-[0.8fr_1.2fr]`). Left: heading, one-liner about capacity/rate from `siteConfig`, direct links (email, GitHub, LinkedIn). Right: `<ContactForm />`.

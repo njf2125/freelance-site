@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t" style={{ borderColor: "var(--border)" }}>
-      <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-6">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
         <div>
           <p className="font-mono text-xs" style={{ color: "var(--faint)" }}>
             © {new Date().getFullYear()} nickfig.dev
