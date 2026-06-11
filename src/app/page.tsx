@@ -67,9 +67,51 @@ const processSteps = [
   },
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nickfig.dev/#person",
+      name: "Nick Figliolia",
+      url: "https://nickfig.dev",
+      jobTitle: "Freelance React Engineer",
+      description:
+        "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
+      email: "dev@nickfig.dev",
+      sameAs: [
+        "https://github.com/njf2125",
+        "https://linkedin.com/in/nickfigliolia",
+      ],
+      knowsAbout: [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Frontend Engineering",
+        "Dashboards",
+        "Internal Tools",
+        "Web Applications",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nickfig.dev/#website",
+      url: "https://nickfig.dev",
+      name: "nickfig.dev",
+      description:
+        "Portfolio of Nick Figliolia — freelance React/TypeScript engineer building custom web apps, dashboards, and internal tools.",
+      publisher: { "@id": "https://nickfig.dev/#person" },
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* Hero */}
       <section className="py-14 sm:py-20 border-b border-[var(--border)]">
