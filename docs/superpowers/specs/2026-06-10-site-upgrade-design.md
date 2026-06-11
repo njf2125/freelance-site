@@ -86,7 +86,7 @@ style={{
 }}
 ```
 
-Hover note: the card has `hover:border-[var(--accent)]`, which only changes border *color*. The inline `borderLeft` wins over Tailwind's hover class (inline styles beat stylesheet rules without `!important`), so on hover the left border stays accent at 3px while the other three sides turn accent at 1px. That's the intended effect.
+Hover note: the left accent border is **static** — it shows whether or not the card is hovered, which is the intended signal. Don't expect hover to interact with it. The card already carries `hover:border-[var(--accent)]`, but that utility is a no-op on these cards: the inline `borderColor: "var(--border)"` takes precedence over the hover stylesheet rule (inline styles beat non-`!important` stylesheet rules), so border color doesn't change on hover today — the lift (`-translate-y-1`) and teal shadow provide the hover feedback. This change doesn't alter that behavior.
 
 ### 2c — Client badge
 
