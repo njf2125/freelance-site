@@ -27,13 +27,13 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nickfig.dev"),
-  title: "nickfig.dev — Nick Figliolia, Freelance React Engineer",
+  title: "nickfig.dev — Nick Figliolia, Freelance Software Engineer",
   description:
     "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
   openGraph: {
     type: "website",
     siteName: "nickfig.dev",
-    title: "nickfig.dev — Nick Figliolia, Freelance React Engineer",
+    title: "nickfig.dev — Nick Figliolia, Freelance Software Engineer",
     description:
       "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
     url: "https://nickfig.dev",
@@ -42,14 +42,14 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Nick Figliolia — Freelance React Engineer",
+        alt: "Nick Figliolia — Freelance Software Engineer",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "nickfig.dev — Nick Figliolia, Freelance React Engineer",
+    title: "nickfig.dev — Nick Figliolia, Freelance Software Engineer",
     description:
       "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
     images: ["/opengraph-image.png"],
