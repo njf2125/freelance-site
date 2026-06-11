@@ -75,7 +75,7 @@ const jsonLd = {
       "@id": "https://nickfig.dev/#person",
       name: "Nick Figliolia",
       url: "https://nickfig.dev",
-      jobTitle: "Freelance React Engineer",
+      jobTitle: "Software Engineer",
       description:
         "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
       email: "dev@nickfig.dev",
