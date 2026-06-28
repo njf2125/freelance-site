@@ -3,7 +3,8 @@ import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import { siteConfig } from "@/config/site";
 
-// Add the `img` field to each project matching the screenshot in /public/work/
+// `client: true` marks real paid client work (loud "live client work" signal).
+// Everything else is a personal project — also live, but quietly tagged.
 const projects = [
   {
     slug: "clientroom",
@@ -11,11 +12,11 @@ const projects = [
     description:
       "A private portal for every client. Instead of scattered email threads, each client gets their own room — messaging, shared files, milestones, and invoices in one place.",
     tech: ["Firebase", "Stripe", "Cloudflare Pages"],
-    type: "Product",
+    meta: "Product · live",
     year: "2025",
     img: "/work/clientroom.png",
-    github: "https://github.com/njf2125/ClientRoom",
-    demo: "https://clientroom.app",
+    client: false,
+    url: "https://clientroom.app",
     caseStudy: "/work/clientroom",
   },
   {
@@ -24,10 +25,11 @@ const projects = [
     description:
       "A real-time job tracker for a paintless dent repair workshop — Kanban board for techs, TV display mode for the shop floor, and role-based PIN access.",
     tech: ["React", "TypeScript", "Firestore", "Cloudflare Pages Functions"],
-    type: "Dashboard",
+    meta: "Dashboard · in production since 2025",
     year: "2025",
     img: "/work/cdr.png",
-    demo: "https://cdr.fignacious.com",
+    client: true,
+    url: "https://cdr.fignacious.com",
     caseStudy: "/work/cdr-dash",
   },
   {
@@ -36,11 +38,11 @@ const projects = [
     description:
       "A collaborative reading tracker built for two people to stay on the same page with real-time sync and spoiler protection.",
     tech: ["React", "TypeScript", "Firebase Auth", "Firestore"],
-    type: "iOS · Android · Web",
+    meta: "iOS · Android · Web · live",
     year: "2025",
     img: "/work/samepage.png",
-    github: "https://github.com/njf2125/SamePage",
-    demo: "https://samepage.pages.dev",
+    client: false,
+    url: "https://samepage.pages.dev",
     appStore: "https://apps.apple.com/us/app/samepage-read-together/id6770348751",
     caseStudy: "/work/samepage",
   },
@@ -211,54 +213,114 @@ export default function Home() {
           {projects.map((project) => (
             <div
               key={project.slug}
-              className="group grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(45,212,191,0.15)]"
+              className="group relative grid grid-cols-1 sm:grid-cols-2 overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1"
               style={{
                 backgroundColor: "var(--surface)",
-                borderColor: "var(--border)",
-                ...(project.slug === "cdr-dash" && {
-                  borderLeft: "3px solid var(--accent)",
+                borderColor: project.client
+                  ? "rgba(45,212,191,0.35)"
+                  : "var(--border)",
+                ...(project.client && {
+                  boxShadow:
+                    "0 0 0 1px rgba(45,212,191,0.06), 0 24px 48px -28px rgba(45,212,191,0.25)",
                 }),
               }}
             >
+              {/* Client cards get a top accent bar instead of a static left border */}
+              {project.client && (
+                <div
+                  className="absolute top-0 left-0 right-0 h-[3px] z-[3]"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, var(--accent), rgba(45,212,191,0))",
+                  }}
+                />
+              )}
+
               {/* Screenshot */}
-              <div
-                className="relative overflow-hidden border-b sm:border-b-0 sm:border-r w-full h-full min-h-[220px]"
-                style={{ borderColor: "var(--border)" }}
-              >
+              <div className="relative overflow-hidden w-full h-full min-h-[230px]">
                 <Image
                   src={project.img}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  sizes="(max-w-md) 100vw, 400px"
+                  sizes="(max-width: 640px) 100vw, 400px"
                 />
-              </div>
 
-              {/* Content */}
-              <div className="p-6 flex flex-col">
-                {project.slug === "cdr-dash" && (
+                {/* Edge fade so the image reads into the content column on desktop */}
+                <div
+                  className="absolute inset-0 hidden sm:block pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent 55%, var(--surface) 100%)",
+                  }}
+                />
+
+                {/* Status pill — overlaid on the screenshot */}
+                {project.client ? (
                   <div
-                    className="flex items-center gap-1.5 mb-3 w-fit rounded-full border px-2 py-0.5"
-                    style={{ background: "rgba(45,212,191,0.08)", borderColor: "rgba(45,212,191,0.25)" }}
+                    className="absolute top-3.5 left-3.5 flex items-center gap-2 rounded-full px-2.5 py-1.5"
+                    style={{
+                      backgroundColor: "var(--accent)",
+                      boxShadow: "0 4px 14px -2px rgba(45,212,191,0.5)",
+                    }}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                    <span className="text-[9px] font-mono uppercase tracking-wider text-[var(--accent)]">
-                      Client work · in production
+                    <span className="relative flex h-[7px] w-[7px]">
+                      <span
+                        className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                        style={{ backgroundColor: "var(--accent-ink)" }}
+                      ></span>
+                      <span
+                        className="relative inline-flex rounded-full h-[7px] w-[7px]"
+                        style={{ backgroundColor: "var(--accent-ink)" }}
+                      ></span>
+                    </span>
+                    <span
+                      className="font-mono text-[11px] font-medium uppercase tracking-wider"
+                      style={{ color: "var(--accent-ink)" }}
+                    >
+                      Live client work
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    className="absolute top-3.5 left-3.5 flex items-center gap-1.5 rounded-full border px-2.5 py-1.5"
+                    style={{
+                      backgroundColor: "rgba(9,9,11,0.7)",
+                      backdropFilter: "blur(4px)",
+                      borderColor: "var(--border-2)",
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--faint)]" />
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--muted)]">
+                      Personal project
                     </span>
                   </div>
                 )}
-                <div className="flex items-center justify-between mb-3">
+              </div>
+
+              {/* Content */}
+              <div className="p-6 sm:p-7 flex flex-col">
+                <div className="flex items-baseline justify-between gap-4 mb-1.5">
                   <Link href={`/work/${project.slug}`} className="hover:underline">
-                    <h3 className="font-display text-xl font-semibold text-[var(--text)]">
+                    <h3 className="font-display text-2xl font-semibold text-[var(--text)] tracking-tight">
                       {project.title}
                     </h3>
                   </Link>
-                  <span className="text-[10px] font-mono text-[var(--faint)] text-right ml-4 shrink-0">
-                    {project.type}<br />{project.year}
+                  <span className="font-mono text-[11px] text-[var(--faint)] whitespace-nowrap">
+                    {project.year}
                   </span>
                 </div>
 
-                <p className="text-sm text-[var(--muted)] mb-5 leading-relaxed">
+                <p
+                  className="font-mono text-[11px] mb-3.5 tracking-wide"
+                  style={{
+                    color: project.client ? "var(--accent)" : "var(--faint)",
+                  }}
+                >
+                  {project.meta}
+                </p>
+
+                <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -266,34 +328,51 @@ export default function Home() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-[var(--border)] bg-[var(--bg)] text-[var(--faint)]"
+                      className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-[var(--border)] bg-[var(--bg)] text-[var(--muted)]"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4 mt-auto">
-                  {"github" in project && project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer"
-                      className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
-                      GitHub
-                    </a>
-                  )}
-                  {"appStore" in project && project.appStore && (
-                    <a href={project.appStore} target="_blank" rel="noopener noreferrer"
-                      className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
-                      App Store
-                    </a>
-                  )}
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                    className="text-xs font-mono text-[var(--faint)] hover:text-[var(--accent)] transition-colors">
-                    Live Demo
+                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-[var(--border)]">
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
+                  >
+                    Visit live ↗
                   </a>
-                  <Link href={project.caseStudy}
-                    className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors ml-auto">
-                    Case study →
-                  </Link>
+                  {"appStore" in project && project.appStore && (
+                    <a
+                      href={project.appStore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
+                    >
+                      App Store ↗
+                    </a>
+                  )}
+                  {project.client ? (
+                    <Link
+                      href={project.caseStudy}
+                      className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-mono font-medium transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
+                      style={{
+                        backgroundColor: "var(--accent)",
+                        color: "var(--accent-ink)",
+                      }}
+                    >
+                      Case study →
+                    </Link>
+                  ) : (
+                    <Link
+                      href={project.caseStudy}
+                      className="ml-auto text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
+                    >
+                      Case study →
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
