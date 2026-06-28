@@ -10,10 +10,32 @@ const WORK_IMAGES: Record<string, string> = {
   samepage: "/work/samepage.png",
 };
 
-const WORK_META: Record<string, { type: string; year: string; demo: string; github?: string; appStore?: string; }> = {
-  clientroom: { type: "Product · SaaS", year: "2025", demo: "https://clientroom.app", github: "https://github.com/njf2125/ClientRoom" },
-  "cdr-dash":  { type: "Client work · Dashboard", year: "2025", demo: "https://cdr.fignacious.com" },
-  samepage:    { type: "iOS · Android · Web", year: "2025", demo: "https://samepage.pages.dev", github: "https://github.com/njf2125/SamePage", appStore: "https://apps.apple.com/us/app/samepage-read-together/id6770348751" },
+// `client: true` marks real paid client work (loud "live client work" signal).
+// Everything else is a personal project — also live, but quietly tagged.
+const WORK_META: Record<
+  string,
+  { type: string; year: string; url: string; client: boolean; appStore?: string }
+> = {
+  clientroom: {
+    type: "Product · SaaS",
+    year: "2025",
+    url: "https://clientroom.app",
+    client: false,
+  },
+  "cdr-dash": {
+    type: "Dashboard",
+    year: "2025",
+    url: "https://cdr.fignacious.com",
+    client: true,
+  },
+  samepage: {
+    type: "iOS · Android · Web",
+    year: "2025",
+    url: "https://samepage.pages.dev",
+    client: false,
+    appStore:
+      "https://apps.apple.com/us/app/samepage-read-together/id6770348751",
+  },
 };
 
 interface WorkCardProps {
@@ -22,19 +44,35 @@ interface WorkCardProps {
 
 export default function WorkCard({ project }: WorkCardProps) {
   const img = WORK_IMAGES[project.slug];
-  const meta = WORK_META[project.slug] ?? { type: "—", year: "—", demo: "#" };
+  const meta =
+    WORK_META[project.slug] ?? { type: "—", year: "—", url: "#", client: false };
 
   return (
     <article
-      className="group grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-2xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(45,212,191,0.15)]"
-      style={{ backgroundColor: "var(--surface)", borderColor: "var(--border)" }}
+      className="group relative grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr] overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1"
+      style={{
+        backgroundColor: "var(--surface)",
+        borderColor: meta.client ? "rgba(45,212,191,0.35)" : "var(--border)",
+        ...(meta.client && {
+          boxShadow:
+            "0 0 0 1px rgba(45,212,191,0.06), 0 24px 48px -28px rgba(45,212,191,0.25)",
+        }),
+      }}
     >
+      {/* Client cards get a top accent bar instead of a static left border */}
+      {meta.client && (
+        <div
+          className="absolute top-0 left-0 right-0 h-[3px] z-[3]"
+          style={{
+            background:
+              "linear-gradient(90deg, var(--accent), rgba(45,212,191,0))",
+          }}
+        />
+      )}
+
       {/* Screenshot */}
       {img && (
-        <div
-          className="relative overflow-hidden border-b sm:border-b-0 sm:border-r w-full h-full min-h-[260px]"
-          style={{ borderColor: "var(--border)" }}
-        >
+        <div className="relative overflow-hidden w-full h-full min-h-[260px]">
           <Image
             src={img}
             alt={project.title}
@@ -42,6 +80,57 @@ export default function WorkCard({ project }: WorkCardProps) {
             className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             sizes="(max-w-md) 100vw, 400px"
           />
+
+          {/* Edge fade so the image reads into the content column on desktop */}
+          <div
+            className="absolute inset-0 hidden sm:block pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent 55%, var(--surface) 100%)",
+            }}
+          />
+
+          {/* Status pill — overlaid on the screenshot */}
+          {meta.client ? (
+            <div
+              className="absolute top-3.5 left-3.5 flex items-center gap-2 rounded-full px-2.5 py-1.5"
+              style={{
+                backgroundColor: "var(--accent)",
+                boxShadow: "0 4px 14px -2px rgba(45,212,191,0.5)",
+              }}
+            >
+              <span className="relative flex h-[7px] w-[7px]">
+                <span
+                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                  style={{ backgroundColor: "var(--accent-ink)" }}
+                ></span>
+                <span
+                  className="relative inline-flex rounded-full h-[7px] w-[7px]"
+                  style={{ backgroundColor: "var(--accent-ink)" }}
+                ></span>
+              </span>
+              <span
+                className="font-mono text-[11px] font-medium uppercase tracking-wider"
+                style={{ color: "var(--accent-ink)" }}
+              >
+                Live client work
+              </span>
+            </div>
+          ) : (
+            <div
+              className="absolute top-3.5 left-3.5 flex items-center gap-1.5 rounded-full border px-2.5 py-1.5"
+              style={{
+                backgroundColor: "rgba(9,9,11,0.7)",
+                backdropFilter: "blur(4px)",
+                borderColor: "var(--border-2)",
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--faint)]" />
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--muted)]">
+                Personal project
+              </span>
+            </div>
+          )}
         </div>
       )}
 
@@ -105,27 +194,29 @@ export default function WorkCard({ project }: WorkCardProps) {
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-4 mt-auto">
-          <a href={meta.demo} target="_blank" rel="noopener noreferrer"
+        <div className="flex items-center gap-4 mt-auto pt-4 border-t border-[var(--border)]">
+          <a href={meta.url} target="_blank" rel="noopener noreferrer"
             className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
-            Live Demo ↗
+            Visit live ↗
           </a>
-          {meta.github && (
-            <a href={meta.github} target="_blank" rel="noopener noreferrer"
-              className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
-              GitHub ↗
-            </a>
-          )}
           {meta.appStore && (
             <a href={meta.appStore} target="_blank" rel="noopener noreferrer"
               className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
               App Store ↗
             </a>
           )}
-          <Link href={`/work/${project.slug}`}
-            className="text-xs font-mono text-[var(--text)] hover:text-[var(--accent)] transition-colors ml-auto">
-            Case study →
-          </Link>
+          {meta.client ? (
+            <Link href={`/work/${project.slug}`}
+              className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-mono font-medium transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
+              style={{ backgroundColor: "var(--accent)", color: "var(--accent-ink)" }}>
+              Case study →
+            </Link>
+          ) : (
+            <Link href={`/work/${project.slug}`}
+              className="ml-auto text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors">
+              Case study →
+            </Link>
+          )}
         </div>
       </div>
     </article>
