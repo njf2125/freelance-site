@@ -7,10 +7,12 @@ export const metadata: Metadata = {
   title: "About — nickfig.dev",
   description:
     "I build custom dashboards, client portals, and internal tools for small teams that have outgrown off-the-shelf software.",
+  alternates: { canonical: "/about" },
   openGraph: {
     title: "About — nickfig.dev",
     description:
       "I build custom dashboards, client portals, and internal tools for small teams that have outgrown off-the-shelf software.",
+    url: "https://nickfig.dev/about",
   },
 };
 

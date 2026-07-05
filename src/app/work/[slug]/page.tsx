@@ -23,10 +23,23 @@ export async function generateMetadata({
     const { frontmatter } = getCaseStudy(slug);
     const title = `${frontmatter.title} — nickfig.dev`;
     const description = frontmatter.problem;
+    const image = frontmatter.image ?? "/opengraph-image.png";
     return {
       title,
       description,
-      openGraph: { title, description },
+      alternates: { canonical: `/work/${slug}` },
+      openGraph: {
+        title,
+        description,
+        url: `https://nickfig.dev/work/${slug}`,
+        images: [{ url: image, width: 1200, height: 630, alt: frontmatter.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [image],
+      },
     };
   } catch {
     return { title: "Not Found" };
@@ -53,12 +66,29 @@ export default async function CaseStudyPage({
   const currentIndex = studies.findIndex((s) => s.slug === slug);
   const nextStudy = studies[(currentIndex + 1) % studies.length];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: frontmatter!.title,
+    description: frontmatter!.problem,
+    url: `https://nickfig.dev/work/${slug}`,
+    image: `https://nickfig.dev${frontmatter!.image ?? "/opengraph-image.png"}`,
+    creator: { "@id": "https://nickfig.dev/#person" },
+    keywords: frontmatter!.stack.join(", "),
+  };
+
   return (
-    <CaseStudyLayout
-      {...frontmatter!}
-      nextStudy={{ slug: nextStudy.slug, title: nextStudy.title }}
-    >
-      <MDXRemote source={content!} components={components} />
-    </CaseStudyLayout>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <CaseStudyLayout
+        {...frontmatter!}
+        nextStudy={{ slug: nextStudy.slug, title: nextStudy.title }}
+      >
+        <MDXRemote source={content!} components={components} />
+      </CaseStudyLayout>
+    </>
   );
 }

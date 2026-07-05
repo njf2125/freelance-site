@@ -1,5 +1,9 @@
+import fs from "fs";
+import path from "path";
 import { MetadataRoute } from "next";
 import { getAllCaseStudies } from "@/lib/mdx";
+
+const CONTENT_DIR = path.join(process.cwd(), "src/content/work");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudies = getAllCaseStudies();
@@ -25,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...caseStudies.map((study) => ({
       url: `https://nickfig.dev/work/${study.slug}`,
-      lastModified: new Date(),
+      lastModified: fs.statSync(path.join(CONTENT_DIR, `${study.slug}.mdx`)).mtime,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

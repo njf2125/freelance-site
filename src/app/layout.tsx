@@ -28,6 +28,7 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nickfig.dev"),
   title: "nickfig.dev — Nick Figliolia, Freelance Software Engineer",
+  alternates: { canonical: "/" },
   description:
     "React/TypeScript engineer available for freelance work. I build custom web apps, dashboards, and internal tools for teams that have outgrown off-the-shelf software.",
   openGraph: {
