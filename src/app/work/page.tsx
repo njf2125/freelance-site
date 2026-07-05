@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: "Work — nickfig.dev",
   description:
     "Custom dashboards, client portals, and internal tools — built for specific teams and shipped to production.",
+  alternates: { canonical: "/work" },
   openGraph: {
     title: "Work — nickfig.dev",
     description:
       "Custom dashboards, client portals, and internal tools — built for specific teams and shipped to production.",
+    url: "https://nickfig.dev/work",
   },
 };
 
