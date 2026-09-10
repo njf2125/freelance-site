@@ -10,3 +10,9 @@ dist/
 *.log
 .DS_Store
 .superpowers/
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/blob-report/
