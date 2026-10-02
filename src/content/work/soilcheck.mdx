@@ -1,0 +1,62 @@
+---
+title: SoilCheck
+subtitle: A local-first PWA that tells you which pots need checking today
+stack: [React, TypeScript, Dexie, Vite PWA, Cloudflare Pages]
+problem: Watering schedules don't survive contact with a real garden. A terracotta pot in July and a self-watering planter in October dry out on completely different clocks, and a fixed "every three days" reminder is wrong for both.
+whatWasBuilt: An installable offline PWA that models how fast each pot dries — from the plant, the container, and the weather — and sorts the whole garden by urgency so the answer is the first thing on screen.
+outcome: A morning check that takes seconds on a phone in bright sun, with no account, no sync, and no subscription. Everything lives on the device.
+featured: true
+image: /work/soilcheck.png
+order: 2
+stats:
+  - label: "Status"
+    value: "Live · soilcheck.app"
+    highlight: true
+  - label: "Storage"
+    value: "IndexedDB · Offline"
+  - label: "Weather"
+    value: "NWS · No API key"
+---
+
+## Background
+
+SoilCheck answers one question each morning: **which pots need checking today?** You add your plants once — what they are, what they're growing in, indoor or out — and the app works out the rest.
+
+It's designed to be read on a phone, on the patio, in bright sun, with dirty hands. That constraint drove almost every decision.
+
+## The Model
+
+Each plant gets a drying interval:
+
+```
+interval      = baseDryingDays × containerMultiplier × weatherFactor
+nextCheckDate = max(lastWatered, lastChecked) + interval
+urgency       = (now − lastEvent) / interval
+```
+
+Terracotta breathes, so it dries at `0.7×`. A hanging basket loses water on every side at `0.5×`. A self-watering pot holds out at `2.0×`.
+
+<Callout>
+**Urgency is a fraction of the interval, not days overdue.**
+A basil two days late is a genuine emergency; a snake plant two days late is not. Cards sort by that fraction, and a moisture column down each card's edge draws it directly — full after watering, draining as the soil dries, rust once overdue. It reads at arm's length without parsing a number.
+</Callout>
+
+## What I Built
+
+- **Watered vs. still moist** — two deliberately different actions. Both reset the schedule, but only one claims you watered, so the history stays honest.
+- **Rain prompts** — the app checks National Weather Service observations near your ZIP and *asks* whether your pots got wet. It never decides on its own.
+- **Temperature adjustment** — hot weather ahead shortens outdoor intervals and a cool spell lengthens them, averaged over three days of forecast highs so one hot afternoon doesn't whipsaw the garden.
+- **Installable and offline** — a PWA with an app-icon badge showing how many pots are due, plus export/import backups.
+
+## Key Technical Decision
+
+<Callout>
+**Ask about rain instead of acting on it.**
+NWS precipitation data is sparse — stations report rain when it falls and omit the field otherwise. Across five stations near Wilmington, NC, nearby stations disagreed on rainfall amounts by up to 3×, while agreeing on *whether* it rained. That's fatal for an automatic adjustment and fine for a prompt a human confirms. Temperature, which every station reports on every observation, is the one input the app trusts without asking.
+</Callout>
+
+## Stack
+
+React + TypeScript · Vite · Tailwind CSS · Dexie (IndexedDB) · Vitest · Cloudflare Pages
+
+<a href="https://soilcheck.app" target="_blank" rel="noopener noreferrer">Visit SoilCheck →</a>

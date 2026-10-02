@@ -60,12 +60,15 @@ export default function About() {
           </p>
 
           <p className="text-base text-[var(--muted)] leading-relaxed mb-4">
-            Recent builds: <strong className="text-[var(--text)] font-medium">SamePage</strong>,
-            a collaborative reading tracker live on iOS and Android;{" "}
-            <strong className="text-[var(--text)] font-medium">Client Room</strong>,
-            a portal for freelancers with Stripe-powered invoicing; and the{" "}
+            Recent builds: the{" "}
             <strong className="text-[var(--text)] font-medium">CDR Dashboard</strong>,
-            a real-time job tracker built for a repair workshop.
+            a real-time job tracker built for a repair workshop, and{" "}
+            <strong className="text-[var(--text)] font-medium">SoilCheck</strong>,
+            an offline-first app that knows when your pots dry out. My own products —{" "}
+            <strong className="text-[var(--text)] font-medium">PlotLock</strong>,{" "}
+            <strong className="text-[var(--text)] font-medium">Client Room</strong>, and{" "}
+            <strong className="text-[var(--text)] font-medium">PitchInILM</strong> — live under{" "}
+            <strong className="text-[var(--text)] font-medium">Syconos</strong>, my product studio.
           </p>
 
           <p className="text-base text-[var(--muted)] leading-relaxed mb-8">

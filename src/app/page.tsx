@@ -1,24 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
+import SyconosCard from "@/components/SyconosCard";
 import { siteConfig } from "@/config/site";
 
 // `client: true` marks real paid client work (loud "live client work" signal).
 // Everything else is a personal project — also live, but quietly tagged.
 const projects = [
-  {
-    slug: "clientroom",
-    title: "Client Room",
-    description:
-      "A private portal for every client. Instead of scattered email threads, each client gets their own room — messaging, shared files, milestones, and invoices in one place.",
-    tech: ["Firebase", "Stripe", "Cloudflare Pages"],
-    meta: "Product · live",
-    year: "2025",
-    img: "/work/clientroom.png",
-    client: false,
-    url: "https://clientroom.app",
-    caseStudy: "/work/clientroom",
-  },
   {
     slug: "cdr-dash",
     title: "CDR Dashboard",
@@ -33,18 +21,17 @@ const projects = [
     caseStudy: "/work/cdr-dash",
   },
   {
-    slug: "samepage",
-    title: "SamePage",
+    slug: "soilcheck",
+    title: "SoilCheck",
     description:
-      "A collaborative reading tracker built for two people to stay on the same page with real-time sync and spoiler protection.",
-    tech: ["React", "TypeScript", "Firebase Auth", "Firestore"],
-    meta: "iOS · Android · Web · live",
-    year: "2025",
-    img: "/work/samepage.png",
+      "A local-first PWA that tells you which pots need checking today — it models how fast each one dries from the plant, the container, and the weather.",
+    tech: ["React", "TypeScript", "Dexie", "Vite PWA"],
+    meta: "PWA · offline · live",
+    year: "2026",
+    img: "/work/soilcheck.png",
     client: false,
-    url: "https://samepage.pages.dev",
-    appStore: "https://apps.apple.com/us/app/samepage-read-together/id6770348751",
-    caseStudy: "/work/samepage",
+    url: "https://soilcheck.app",
+    caseStudy: "/work/soilcheck",
   },
 ];
 
@@ -344,16 +331,6 @@ export default function Home() {
                   >
                     Visit live ↗
                   </a>
-                  {"appStore" in project && project.appStore && (
-                    <a
-                      href={project.appStore}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-                    >
-                      App Store ↗
-                    </a>
-                  )}
                   {project.client ? (
                     <Link
                       href={project.caseStudy}
@@ -377,6 +354,7 @@ export default function Home() {
               </div>
             </div>
           ))}
+          <SyconosCard />
         </div>
       </section>
 

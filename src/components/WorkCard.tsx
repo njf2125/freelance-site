@@ -5,9 +5,8 @@ import { CaseStudy } from "@/lib/types";
 // Static map of slug → public screenshot path.
 // Add matching files to /public/work/ — see README Step 0.
 const WORK_IMAGES: Record<string, string> = {
-  clientroom: "/work/clientroom.png",
   "cdr-dash": "/work/cdr.png",
-  samepage: "/work/samepage.png",
+  soilcheck: "/work/soilcheck.png",
 };
 
 // `client: true` marks real paid client work (loud "live client work" signal).
@@ -16,25 +15,17 @@ const WORK_META: Record<
   string,
   { type: string; year: string; url: string; client: boolean; appStore?: string }
 > = {
-  clientroom: {
-    type: "Product · SaaS",
-    year: "2025",
-    url: "https://clientroom.app",
-    client: false,
-  },
   "cdr-dash": {
     type: "Dashboard",
     year: "2025",
     url: "https://cdr.fignacious.com",
     client: true,
   },
-  samepage: {
-    type: "iOS · Android · Web",
-    year: "2025",
-    url: "https://samepage.pages.dev",
+  soilcheck: {
+    type: "PWA · Offline",
+    year: "2026",
+    url: "https://soilcheck.app",
     client: false,
-    appStore:
-      "https://apps.apple.com/us/app/samepage-read-together/id6770348751",
   },
 };
 

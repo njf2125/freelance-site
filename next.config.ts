@@ -13,6 +13,13 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: true,
   },
+  async redirects() {
+    return ["clientroom", "samepage"].map((slug) => ({
+      source: `/work/${slug}`,
+      destination: "/work#syconos",
+      permanent: false,
+    }));
+  },
 };
 
 export default withMDX(nextConfig);

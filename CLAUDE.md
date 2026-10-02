@@ -76,26 +76,32 @@ src/
     icon.png                ← favicon
     opengraph-image.png     ← OG image for social sharing
     work/
-      page.tsx              ← work index (lists all case studies via getAllCaseStudies())
+      page.tsx              ← work index (case studies via getAllCaseStudies(), then <SyconosCard />)
       [slug]/page.tsx       ← dynamic case study page (MDXRemote + CaseStudyLayout)
+    blog/
+      page.tsx              ← blog index (getAllPosts(), newest first)
+      [slug]/page.tsx       ← blog post page (MDXRemote, same prose styling as case studies)
+      rss.xml/route.ts      ← static RSS feed
     ContactForm.tsx         ← "use client" form, posts directly to Web3Forms API
   components/
-    Nav.tsx                 ← sticky top nav: Work · About · Contact
+    Nav.tsx                 ← sticky top nav: Work · Blog · About · Start a project
     Footer.tsx              ← copyright, "Built by me, obviously.", GitHub, LinkedIn
     CaseStudyLayout.tsx     ← case study wrapper: back-link, header, stats, 3-col callouts, MDX slot
     ContactForm.tsx         ← "use client" form, posts directly to https://api.web3forms.com/submit
     WorkCard.tsx            ← image + content card used on /work index page
+    SyconosCard.tsx         ← Syconos product studio card (PlotLock, Client Room, PitchInILM) on home + /work
     WorkTable.tsx           ← (legacy) table view, still present
     callout.tsx             ← <Callout> MDX component for highlighted decisions
   config/
     site.ts                 ← SiteConfig: availability ("available"|"busy"), rate, maxClients, analyticsToken
   content/work/
-    clientroom.mdx          ← Client Room case study
-    cdr-dash.mdx            ← CDR Dashboard case study
-    samepage.mdx            ← SamePage case study
+    cdr-dash.mdx            ← CDR Dashboard case study (client work)
+    soilcheck.mdx           ← SoilCheck case study (personal project)
+  content/blog/
+    *.mdx                   ← blog posts
   lib/
-    mdx.ts                  ← getAllCaseStudies() + getCaseStudy(slug) using gray-matter
-    types.ts                ← CaseStudy, StatCard, NavLink interfaces
+    mdx.ts                  ← case study + blog post loaders using gray-matter
+    types.ts                ← CaseStudy, BlogPost, StatCard, NavLink interfaces
 ```
 
 ---
@@ -105,7 +111,7 @@ src/
 Sections in order, all left-aligned, `max-w-5xl` (the container width used site-wide — Nav, Footer, home, about, work, and case study pages all share it). Projects are defined inline in `page.tsx` as a `projects` array (not pulled from MDX) — this array is the source of truth for home-page card content (title, description, tech, links, image path).
 
 1. **Hero** — Two-column layout (`sm:grid-cols-2`). Left: availability pulsing dot + headline + subhead + CTA buttons ("Start a project →" fills teal, "See the work →" is text link). Right: a clean `aspect-[16/10]` bordered screenshot frame showing the CDR dashboard (`/work/cdr.png`), displayed uncropped with a soft shadow — no browser chrome.
-2. **Work** — All three projects (Client Room, CDR Dashboard, SamePage) as horizontal image+content cards. Each card: screenshot on the left, title/type/year/description/tech tags/links on the right. Hover lifts with teal shadow.
+2. **Work** — CDR Dashboard and SoilCheck as horizontal image+content cards, followed by the Syconos card. Each card: screenshot on the left, title/type/year/description/tech tags/links on the right. Hover lifts with teal shadow.
 3. **How I Work** — Three steps with large accent numerals, border-top dividers: Discovery, Build, Launch.
 4. **Contact** — Two-column layout (`sm:grid-cols-[0.8fr_1.2fr]`). Left: heading, one-liner about capacity/rate from `siteConfig`, direct links (email, GitHub, LinkedIn). Right: `<ContactForm />`.
 
@@ -142,6 +148,26 @@ stats:
 
 The `<Callout>` component is available inside MDX for highlighting key technical decisions.
 
+### Freelance site vs. Syconos
+
+This site showcases freelance/client work and personal projects (CDR Dashboard, SoilCheck). Nick's own products — PlotLock (formerly SamePage), Client Room, PitchInILM — belong to **Syconos**, his product studio (syconos.com, repo Syconos/syconos). They appear only in `SyconosCard`, not as case studies. `/work/clientroom` and `/work/samepage` redirect to `/work#syconos` (see `next.config.ts`).
+
+---
+
+## Blog Post MDX Frontmatter
+
+Each `.mdx` file in `src/content/blog/` — the filename is the slug:
+
+```yaml
+title: string
+description: string   # shown on the index, in meta tags, and in RSS
+date: 2026-09-30      # YYYY-MM-DD; unquoted is fine
+tags: [string, ...]   # optional
+draft: true           # optional — visible in `npm run dev`, excluded from production builds
+```
+
+`<Callout>` works in posts too.
+
 ---
 
 ## Conventions
@@ -160,7 +186,6 @@ The `<Callout>` component is available inside MDX for highlighting key technical
 
 Do not add these unless explicitly requested:
 
-- Blog or writing section
 - CMS integration
 - Pricing page
 - Authentication
