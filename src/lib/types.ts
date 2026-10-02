@@ -18,6 +18,15 @@ export interface CaseStudy {
   order?: number;
 }
 
+export interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  tags?: string[];
+  draft?: boolean;
+}
+
 export interface NavLink {
   label: string;
   href: string;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SyconosCard from "@/components/SyconosCard";
 import WorkCard from "@/components/WorkCard";
 import { getAllCaseStudies } from "@/lib/mdx";
 
@@ -35,6 +36,7 @@ export default function WorkIndex() {
         {caseStudies.map((project) => (
           <WorkCard key={project.slug} project={project} />
         ))}
+        <SyconosCard />
       </div>
     </main>
   );

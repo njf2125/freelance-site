@@ -1,9 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 const CASE_STUDIES = [
-  { slug: "clientroom", title: "Client Room" },
   { slug: "cdr-dash", title: "CDR Dashboard" },
-  { slug: "samepage", title: "SamePage" },
+  { slug: "soilcheck", title: "SoilCheck" },
 ];
 
 test.describe("Work index page", () => {
@@ -61,7 +60,7 @@ test.describe("Case study pages", () => {
   });
 
   test("bottom CTA links to the contact section", async ({ page }) => {
-    await page.goto("/work/samepage");
+    await page.goto("/work/soilcheck");
     await page
       .getByRole("link", { name: "Start a project →" })
       .last()

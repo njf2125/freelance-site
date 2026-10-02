@@ -7,11 +7,14 @@ test.describe("Navigation", () => {
     await expect(page).toHaveURL("/");
   });
 
-  test("nav links go to Work and About", async ({ page }) => {
+  test("nav links go to Work, Blog, and About", async ({ page }) => {
     await page.goto("/");
 
     await page.getByRole("navigation").getByRole("link", { name: "Work" }).click();
     await expect(page).toHaveURL("/work");
+
+    await page.getByRole("navigation").getByRole("link", { name: "Blog" }).click();
+    await expect(page).toHaveURL("/blog");
 
     await page.getByRole("navigation").getByRole("link", { name: "About" }).click();
     await expect(page).toHaveURL("/about");

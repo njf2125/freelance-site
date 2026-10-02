@@ -1,0 +1,39 @@
+---
+title: Why my plant app asks about the rain instead of trusting it
+description: Weather data looked like the obvious input for a watering schedule. Then I compared five stations a few miles apart.
+date: 2026-09-30
+tags: [SoilCheck, Weather data, Product decisions]
+---
+
+[SoilCheck](/work/soilcheck) answers one question each morning: which pots need checking today? Each plant gets a drying interval from what it is and what it's growing in, and the app sorts the garden by how close each pot is to drying out.
+
+The obvious next step was weather. If it rained yesterday, the outdoor pots don't need water today. The National Weather Service publishes observations for free — no API key, no quota — so the plan was simple: pull recent rainfall near the user's ZIP code and push the schedule back automatically.
+
+## The data doesn't say what you think it says
+
+NWS precipitation observations are sparse. Stations report the field when it rains and leave it out when they have nothing to say. So a missing value doesn't mean "dry" — it means "unknown," and a schedule that treats it as dry will tell you to water a garden that's already soaked.
+
+Then I compared five stations near Wilmington, NC. They disagreed on *how much* rain fell by up to 3×. But they agreed, consistently, on *whether* it rained.
+
+<Callout>
+**Good enough for a question, not for a decision.**
+A 3× spread is fatal to an automatic adjustment — the schedule would swing on noise. It's perfectly fine for a prompt a person confirms.
+</Callout>
+
+## So the app asks
+
+When a nearby station reports rain, SoilCheck shows a prompt:
+
+> Rain reported nearby — a weather station on Tuesday recorded rain near you. Did your pots get wet?
+
+You answer yes or no. The rain amount is shown for context and never fed into the maths. And the manual **It rained** button is always there, because you're standing in the garden and the weather station isn't.
+
+## Temperature is different
+
+Temperature is the exception, and the reason is the same data-quality argument run in the other direction. Every station reports temperature on every observation, so the app adjusts for it without asking: hot weather ahead shortens the interval, a cool spell lengthens it, and the card says which is happening.
+
+It averages the next three days of forecast highs, so one hot afternoon doesn't whipsaw the whole garden. And it only applies to outdoor plants — the indoor ones live in your thermostat's climate.
+
+## The general rule
+
+Before automating a decision from someone else's data, check what that data is actually good at. Here it was the same API, two fields, and two opposite answers: one reliable enough to act on, one only reliable enough to ask about.

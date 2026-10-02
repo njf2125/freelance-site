@@ -25,10 +25,10 @@ test.describe("Home page", () => {
     await expect(page.getByText("Available for new projects")).toBeVisible();
   });
 
-  test("lists all three projects with working links", async ({ page }) => {
+  test("lists client work, personal projects, and Syconos products", async ({ page }) => {
     const workSection = page.locator("section", { hasText: "Work" }).first();
 
-    for (const title of ["Client Room", "CDR Dashboard", "SamePage"]) {
+    for (const title of ["CDR Dashboard", "SoilCheck", "Syconos", "PlotLock", "Client Room", "PitchInILM"]) {
       await expect(page.getByRole("heading", { name: title })).toBeVisible();
     }
 
@@ -55,13 +55,13 @@ test.describe("Home page", () => {
   });
 
   test("external project links open in a new tab", async ({ page }) => {
-    const clientRoomLink = projectCard(page, "Client Room").getByRole("link", {
+    const soilCheckLink = projectCard(page, "SoilCheck").getByRole("link", {
       name: "Visit live ↗",
     });
 
-    await expect(clientRoomLink).toHaveAttribute("href", "https://clientroom.app");
-    await expect(clientRoomLink).toHaveAttribute("target", "_blank");
-    await expect(clientRoomLink).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(soilCheckLink).toHaveAttribute("href", "https://soilcheck.app");
+    await expect(soilCheckLink).toHaveAttribute("target", "_blank");
+    await expect(soilCheckLink).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   test("renders the How I Work process steps", async ({ page }) => {
