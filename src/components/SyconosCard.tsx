@@ -18,7 +18,7 @@ const products = [
   {
     name: "Client Room",
     description:
-      "A private portal for every client — messaging, shared files, milestones, and Stripe invoices in one place.",
+      "A private portal for every client — messaging, shared files, milestones, and invoices with your own payment options in one place.",
     img: "/work/clientroom.png",
     links: [{ label: "Visit live ↗", href: "https://clientroom.app" }],
   },
